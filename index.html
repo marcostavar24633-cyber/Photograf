@@ -363,6 +363,27 @@ section{position:relative}
 .rv-nav button,.lb-btn{border-radius:50%}
 .msg-btn{padding:0 26px}
 
+/* ================= HERO: ЦВЕТ ТЕКСТА ПОД ЯРКОСТЬ ФОТО =================
+   Скрипт ставит .is-light на hero, если кадр под текстом светлый.
+   Вручную: data-tone="light" или data-tone="dark" на <picture class="hero-slide"> */
+.hero::before{content:""; position:absolute; inset:0; z-index:1; opacity:0; transition:opacity 1.2s ease; background:linear-gradient(90deg, rgba(244,239,231,.72) 0%, rgba(244,239,231,.4) 38%, rgba(244,239,231,0) 62%), linear-gradient(180deg, rgba(244,239,231,.6) 0%, rgba(244,239,231,0) 34%, rgba(244,239,231,.3) 55%, rgba(244,239,231,.88) 100%)}
+@media (max-width: 760px){ .hero::before{background:linear-gradient(180deg, rgba(244,239,231,.55) 0%, rgba(244,239,231,.15) 25%, rgba(244,239,231,.5) 45%, rgba(244,239,231,.9) 100%)} }
+.hero::after{z-index:1; transition:opacity 1.2s ease}
+.hero.is-light::before{opacity:1}
+.hero.is-light::after{opacity:0}
+.hero,.hero p,.hero .eyebrow,.hero h1 em,.counter-h{transition:color 1s ease}
+.hero.is-light{color:var(--ink)}
+.hero.is-light p{color:var(--ink-2)}
+.hero.is-light .eyebrow,.hero.is-light h1 em{color:var(--accent)}
+.hero.is-light .btn--light{--b:var(--ink); color:var(--paper)}
+.hero.is-light .counter-h{color:var(--muted)}
+.hero.is-light .dots button::before{background:rgba(23,21,18,.25)}
+.hero.is-light .dots button::after{background:var(--ink)}
+.hero.is-light .scroll-hint{background:rgba(23,21,18,.2)}
+.hero.is-light .scroll-hint::after{background:var(--ink)}
+body.hero-light:not(.menu-open) .hdr:not(.is-scrolled){color:var(--ink)}
+body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); color:var(--paper)}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none !important; transition:none !important; scroll-behavior:auto !important}
   .reveal{opacity:1; transform:none}
@@ -1000,12 +1021,50 @@ $$('#mnav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
     b.addEventListener('click', () => go(k, true));
     dots.appendChild(b);
   });
+  // --- Цвет текста под яркость кадра ---
+  const hero = $('.hero');
+  const cv = document.createElement('canvas'), cx = cv.getContext('2d', {willReadFrequently: true});
+  const cache = new Map();
+  function measure(img){
+    const mob = innerWidth < 760;
+    const key = img.currentSrc + '|' + mob;
+    if (cache.has(key)) return cache.get(key);
+    const W = 80, H = Math.max(20, Math.round(W * hero.clientHeight / hero.clientWidth));
+    cv.width = W; cv.height = H;
+    const r = Math.max(W / img.naturalWidth, H / img.naturalHeight);   // как object-fit: cover
+    const dw = img.naturalWidth * r, dh = img.naturalHeight * r;
+    cx.drawImage(img, (W - dw) / 2, (H - dh) / 2, dw, dh);
+    const x1 = mob ? W : Math.round(W * .65), y0 = Math.round(H * .3);   // зона, где стоит текст
+    const d = cx.getImageData(0, y0, x1, H - y0).data;
+    let sum = 0, bright = 0, n = 0;
+    for (let k = 0; k < d.length; k += 4){
+      const l = (.2126 * d[k] + .7152 * d[k + 1] + .0722 * d[k + 2]) / 255;
+      sum += l; if (l > .72) bright++; n++;
+    }
+    const light = sum / n > .5 || bright / n > .3;
+    cache.set(key, light);
+    return light;
+  }
+  function applyTone(slide){
+    const img = $('img', slide);
+    const set = light => {
+      if (!slide.classList.contains('is-active')) return;
+      hero.classList.toggle('is-light', light);
+      document.body.classList.toggle('hero-light', light);
+    };
+    if (slide.dataset.tone) return set(slide.dataset.tone === 'light');
+    const run = () => { try { set(measure(img)); } catch (e) { set(false); } };  // чужой домен без CORS: оставляем светлый текст
+    if (img.complete && img.naturalWidth) run(); else img.addEventListener('load', run, {once: true});
+  }
+  addEventListener('resize', () => { clearTimeout(applyTone.t); applyTone.t = setTimeout(() => applyTone(slides[i]), 300); });
+
   const pad = n => String(n).padStart(2, '0');
   function go(k, user){
     slides[i].classList.remove('is-active'); dots.children[i].classList.remove('is-active');
     i = (k + slides.length) % slides.length;
     const img = $('img', slides[i]); img.loading = 'eager';
     slides[i].classList.add('is-active');
+    applyTone(slides[i]);
     const d = dots.children[i]; d.classList.remove('is-active'); void d.offsetWidth; d.classList.add('is-active');
     cnt.textContent = pad(i + 1) + ' / ' + pad(slides.length);
     if (user) start();
