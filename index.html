@@ -356,6 +356,13 @@ section{position:relative}
   .ftr{padding-bottom:110px}
 }
 
+/* ================= СКРУГЛЁННЫЕ КНОПКИ ================= */
+:root{ --radius:999px }
+.btn{border-radius:var(--radius); isolation:isolate}
+.filters button,.radios span,.msg-btn,.badge,.slots,.g-tag{border-radius:var(--radius)}
+.rv-nav button,.lb-btn{border-radius:50%}
+.msg-btn{padding:0 26px}
+
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none !important; transition:none !important; scroll-behavior:auto !important}
   .reveal{opacity:1; transform:none}
