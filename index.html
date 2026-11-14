@@ -994,16 +994,27 @@ function onScroll(){
 addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
 const burger = $('#burger');
+const menuLinks = $$('#mnav a');
 function setMenu(open){
   document.body.classList.toggle('menu-open', open);
   burger.setAttribute('aria-expanded', open);
   burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
   document.body.style.overflow = open ? 'hidden' : '';
+  if (open) menuLinks[0]?.focus();
 }
 burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-$$('#mnav a').forEach(a => a.addEventListener('click', () => { setMenu(false); burger.focus(); }));
+menuLinks.forEach(a => a.addEventListener('click', () => { setMenu(false); burger.focus(); }));
 addEventListener('keydown', e => {
-  if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); burger.focus(); }
+  if (!document.body.classList.contains('menu-open')) return;
+  if (e.key === 'Escape') { setMenu(false); burger.focus(); return; }
+  if (e.key === 'Tab' && menuLinks.length){
+    const first = menuLinks[0], last = menuLinks[menuLinks.length - 1];
+    if (e.shiftKey && (document.activeElement === first || document.activeElement === burger)){
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || document.activeElement === burger)){
+      e.preventDefault(); first.focus();
+    }
+  }
 });
 
 /* ===================== HERO-СЛАЙДЕР ===================== */
