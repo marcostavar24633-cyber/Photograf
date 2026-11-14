@@ -824,7 +824,7 @@ body::after{
   padding:17px 20px;
   border-radius:999px;
   background:var(--lx-gold);
-  color:var(--lx-ink);
+  color:#11100f !important;
   font:600 9px/1 var(--sans);
   letter-spacing:.12em;
 }
