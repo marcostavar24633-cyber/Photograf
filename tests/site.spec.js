@@ -19,6 +19,15 @@ test('page structure, internal links and local images are valid', async ({ page 
   expect(audit.duplicateIds).toEqual([]);
   expect(audit.missingAnchors).toEqual([]);
   expect(audit.missingImages).toEqual([]);
+
+  for (const section of await page.locator('.reveal').all()) {
+    await section.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(80);
+  }
+  await page.waitForTimeout(1100);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(150);
+  await page.screenshot({ path: 'test-results/photograf-desktop-viewport.png' });
   await page.screenshot({ path: 'test-results/photograf-desktop.png', fullPage: true });
 });
 
@@ -49,8 +58,16 @@ test('mobile navigation remains usable at narrow viewport', async ({ page }) => 
   await page.locator('#burger').click();
   await expect(page.locator('#mnav')).toBeVisible();
   await expect(page.getByRole('link', { name: 'Обсудить съёмку' })).toBeVisible();
+  await page.screenshot({ path: 'test-results/photograf-mobile-menu.png' });
   await page.locator('#menuClose').click();
   await expect(page.locator('#mnav')).toHaveAttribute('aria-hidden', 'true');
+  for (const section of await page.locator('.reveal').all()) {
+    await section.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(60);
+  }
+  await page.waitForTimeout(1100);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(150);
   await page.screenshot({ path: 'test-results/photograf-mobile.png', fullPage: true });
 });
 
