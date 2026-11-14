@@ -592,3 +592,20 @@ a{transition:color .3s var(--lx-ease)}
 .process-cta{margin-top:72px}
 .process-cta>span{color:rgba(241,236,227,.5);font-size:11px;letter-spacing:.04em}
 @media(max-width:900px){.book-grid{grid-template-columns:1fr}}
+
+
+/* Accessibility refinement: maintain the warm palette while meeting
+   WCAG AA contrast for small text on the light editorial surfaces. */
+#services .eyebrow,
+#services .h2 em,
+#services .svc-note,
+#services .lead{
+  color:#6f5638;
+}
+#services .eyebrow::before{background:#6f5638}
+.plan-price small{color:#6f6253}
+.rv figcaption span{color:#6f6253}
+.book .form-body > p{color:#6f6253}
+.book .field input::placeholder,
+.book .field textarea::placeholder{color:#6f6253}
+.book .form-note{color:#6f6253}
