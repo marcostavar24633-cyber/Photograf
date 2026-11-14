@@ -20,10 +20,10 @@ test('page structure, internal links and local images are valid', async ({ page 
   expect(audit.missingAnchors).toEqual([]);
   expect(audit.missingImages).toEqual([]);
 
-  for (const section of await page.locator('.reveal').all()) {
-    await section.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(80);
-  }
+  const firstReveal = page.locator('.reveal').first();
+  await firstReveal.scrollIntoViewIfNeeded();
+  await expect(firstReveal).toHaveClass(/is-in/);
+  await page.locator('.reveal').evaluateAll(elements => elements.forEach(el => el.classList.add('is-in')));
   await page.waitForTimeout(1100);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(150);
@@ -61,10 +61,10 @@ test('mobile navigation remains usable at narrow viewport', async ({ page }) => 
   await page.screenshot({ path: 'test-results/photograf-mobile-menu.png' });
   await page.locator('#menuClose').click();
   await expect(page.locator('#mnav')).toHaveAttribute('aria-hidden', 'true');
-  for (const section of await page.locator('.reveal').all()) {
-    await section.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(60);
-  }
+  const firstReveal = page.locator('.reveal').first();
+  await firstReveal.scrollIntoViewIfNeeded();
+  await expect(firstReveal).toHaveClass(/is-in/);
+  await page.locator('.reveal').evaluateAll(elements => elements.forEach(el => el.classList.add('is-in')));
   await page.waitForTimeout(1100);
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(150);
