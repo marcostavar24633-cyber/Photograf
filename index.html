@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Вера Ланская — фотограф в Санкт-Петербурге | Свадьбы, Love Story, семейные съёмки</title>
-<meta name="description" content="Живые плёночные фотографии свадеб, love story, семейных и портретных съёмок в Петербурге. 9 лет опыта, 640+ историй. Узнайте свободные даты.">
+<meta name="description" content="Демонстрационный дизайн-концепт премиального сайта фотографа: портфолио, пакеты услуг и пример формы заявки. Не является реальным коммерческим предложением.">
 <meta name="theme-color" content="#171512">
 <meta name="robots" content="noindex,follow">
 <link rel="canonical" href="https://marcostavar24633-cyber.github.io/Photograf/">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Вера Ланская — фотографии, которые хочется пересматривать">
-<meta property="og:description" content="Свадьбы, love story, семья, портрет и съёмки в ожидании малыша. Петербург и выезд по миру.">
+<meta property="og:description" content="Демонстрационный дизайн-концепт сайта фотографа. Портфолио и сценарий заявки; не является реальным предложением услуг.">
 <meta property="og:image" content="https://marcostavar24633-cyber.github.io/Photograf/img/1519741497674-611481863552-1200x630.webp">
 <meta property="og:url" content="https://marcostavar24633-cyber.github.io/Photograf/"><!-- ЗАМЕНИТЬ на свой домен -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,20 +24,15 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Вера Ланская — фотограф",
-  "description": "Свадебная, семейная, портретная фотосъёмка и love story в Санкт-Петербурге",
-  "image": "https://marcostavar24633-cyber.github.io/Photograf/img/1519741497674-611481863552-1200x630.webp",
+  "@type": "WebSite",
+  "name": "Вера Ланская — демонстрационный концепт сайта фотографа",
   "url": "https://marcostavar24633-cyber.github.io/Photograf/",
-  "telephone": "+7 (999) 000-00-00",
-  "priceRange": "18000-120000 RUB",
-  "address": { "@type": "PostalAddress", "addressLocality": "Санкт-Петербург", "addressCountry": "RU" },
-  "areaServed": ["Санкт-Петербург", "Ленинградская область", "Россия"],
-  "sameAs": ["https://t.me/lanskaya_photo", "https://vk.com/lanskaya_photo"]
+  "inLanguage": "ru-RU",
+  "description": "Вымышленный демонстрационный дизайн-концепт сайта фотографа. Не является подтверждением реальной личности, услуг, отзывов или коммерческого предложения."
 }
 </script>
 
-<!-- Яндекс.Метрика: вставьте код счётчика сюда и укажите номер в METRIKA_ID ниже -->
+<!-- Аналитика не подключена: демонстрационный проект не запускает счётчики. -->
 
 <style>
 /* ================= БАЗА ================= */
@@ -920,7 +915,7 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
         </div>
         <label class="check" id="agreeWrap">
           <input type="checkbox" name="agree" id="f-agree">
-          <span>Согласен(на) на обработку персональных данных в соответствии с <a href="/privacy.html" target="_blank">политикой конфиденциальности</a> (152-ФЗ)</span>
+          <span>Согласен(на) на обработку персональных данных в соответствии с <a href="privacy.html" target="_blank">политикой конфиденциальности</a> (152-ФЗ)</span>
         </label>
         <button type="submit" class="btn btn--block" id="submitBtn" data-goal="form_submit"><span class="lbl">Забронировать дату</span></button>
         <p class="form-note">Отвечу в течение 2 часов. Это ни к чему не обязывает.</p>
@@ -950,7 +945,7 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
     </div>
     <div class="ftr-bot">
       <span>© <span id="year">2026</span> Вера Ланская. Все фотографии защищены авторским правом.</span>
-      <a href="/privacy.html">Политика конфиденциальности</a>
+      <a href="privacy.html">Политика конфиденциальности</a>
     </div>
   </div>
 </footer>
@@ -974,13 +969,10 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
 <script>
 /* ===================== НАСТРОЙКИ ===================== */
 const CONFIG = {
-  // Telegram-бот: создайте бота у @BotFather, узнайте свой chat_id у @userinfobot.
-  // ВНИМАНИЕ: токен в клиентском коде виден всем. На боевом сайте лучше слать заявку через свой PHP/serverless-прокси.
-  TG_BOT_TOKEN: '',          // '123456:ABC-DEF...'
-  TG_CHAT_ID: '',            // '123456789'
-  FORMSPREE_ID: '',          // запасной вариант: 'xyzabcd' из https://formspree.io
-  METRIKA_ID: 0,             // номер счётчика Яндекс.Метрики
-  FREE_SLOTS: 4              // сколько свободных дат показать в блоке брони
+  // Публичный клиентский код не должен содержать секреты Telegram Bot API.
+  FORMSPREE_ID: '',          // ID формы Formspree; пустое значение оставляет форму в демо-режиме.
+  METRIKA_ID: 0,             // Аналитика отключена.
+  FREE_SLOTS: 4              // Демонстрационное число дат; заменить перед реальным запуском.
 };
 
 const $ = (s, c = document) => c.querySelector(s);
@@ -1209,13 +1201,6 @@ const form = $('#leadForm'), btn = $('#submitBtn');
 function setErr(el, on){ el.closest('.field, .check').classList.toggle('has-error', on); el.setAttribute('aria-invalid', on); }
 ['input', 'change'].forEach(ev => form.addEventListener(ev, e => { const w = e.target.closest('.has-error'); if (w) w.classList.remove('has-error'); }));
 
-async function sendTelegram(text){
-  const r = await fetch(`https://api.telegram.org/bot${CONFIG.TG_BOT_TOKEN}/sendMessage`, {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({chat_id: CONFIG.TG_CHAT_ID, text, parse_mode:'HTML'})
-  });
-  if (!r.ok) throw new Error('telegram');
-}
 async function sendFormspree(data){
   const r = await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`, {
     method:'POST', headers:{'Accept':'application/json'}, body: data
@@ -1237,10 +1222,7 @@ form.addEventListener('submit', async e => {
 
   btn.classList.add('is-loading'); btn.disabled = true;
   try{
-    if (CONFIG.TG_BOT_TOKEN && CONFIG.TG_CHAT_ID){
-      try{ await sendTelegram(text); }
-      catch(err){ if (CONFIG.FORMSPREE_ID) await sendFormspree(data); else throw err; }
-    } else if (CONFIG.FORMSPREE_ID){
+    if (CONFIG.FORMSPREE_ID){
       await sendFormspree(data);
     } else {
       // ДЕМО-РЕЖИМ: не показываем успех, пока канал отправки не подключён.
@@ -1252,9 +1234,15 @@ form.addEventListener('submit', async e => {
   }catch(err){
     btn.classList.remove('is-loading'); btn.disabled = false;
     const note = $('.form-note');
-    note.innerHTML = err?.message === 'demo-not-configured'
-      ? 'Форма пока не подключена. Напишите мне в <a href="https://t.me/lanskaya_photo" target="_blank" rel="noopener">Telegram</a>.'
-      : 'Не удалось отправить заявку. Попробуйте ещё раз или напишите мне в <a href="https://t.me/lanskaya_photo" target="_blank" rel="noopener">Telegram</a>.';
+    note.textContent = err?.message === 'demo-not-configured'
+      ? 'Форма пока не подключена. Напишите мне в '
+      : 'Не удалось отправить заявку. Попробуйте ещё раз или напишите мне в ';
+    const contactLink = document.createElement('a');
+    contactLink.href = 'https://t.me/lanskaya_photo';
+    contactLink.target = '_blank';
+    contactLink.rel = 'noopener noreferrer';
+    contactLink.textContent = 'Telegram';
+    note.append(contactLink, '.');
   }
 });
 
