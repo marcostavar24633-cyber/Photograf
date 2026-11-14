@@ -1001,14 +1001,14 @@ function setMenu(open){
   document.body.style.overflow = open ? 'hidden' : '';
 }
 burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-$('#mnav a').forEach(a => a.addEventListener('click', () => { setMenu(false); burger.focus(); }));
+$$('#mnav a').forEach(a => a.addEventListener('click', () => { setMenu(false); burger.focus(); }));
 addEventListener('keydown', e => {
   if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); burger.focus(); }
 });
 
 /* ===================== HERO-СЛАЙДЕР ===================== */
 (() => {
-  const slides = $('.hero-slide'), dots = $('#dots'), cnt = $('#heroCount'), toggle = $('#heroToggle');
+  const slides = $$('.hero-slide'), dots = $('#dots'), cnt = $('#heroCount'), toggle = $('#heroToggle');
   let i = 0, timer, paused = false;
   slides.forEach((_, k) => {
     const b = document.createElement('button');
