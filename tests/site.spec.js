@@ -84,6 +84,29 @@ test('indexing, local-only form and analytics safeguards are correct', async ({ 
 });
 
 
+
+test('lead form prepares a readable multiline message without submitting data to a server', async ({ page }) => {
+  const nonGetRequests = [];
+  page.on('request', request => {
+    if (request.method() !== 'GET') nonGetRequests.push({ method: request.method(), url: request.url() });
+  });
+
+  await page.goto('/');
+  await page.locator('#f-name').fill('Мария');
+  await page.locator('#f-phone').fill('@maria_photo');
+  await page.locator('#f-agree').check();
+  await page.locator('#submitBtn').click();
+
+  await expect(page.locator('.form-ok')).toBeVisible();
+  const message = await page.locator('#messagePreview').textContent();
+  expect(message).toContain('Имя: Мария');
+  expect(message).toContain('Контакт: @maria_photo');
+  expect(message).toContain('\\nКонтакт:');
+  expect(message).not.toContain('\\\\n');
+  expect(nonGetRequests).toEqual([]);
+});
+
+
 test('primary interactions run without uncaught browser errors or horizontal page overflow', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
