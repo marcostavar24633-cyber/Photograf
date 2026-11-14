@@ -1241,16 +1241,18 @@ form.addEventListener('submit', async e => {
     } else if (CONFIG.FORMSPREE_ID){
       await sendFormspree(data);
     } else {
-      // ДЕМО-РЕЖИМ: пока не заданы ключи, заявка только выводится в консоль
-      console.info('[Демо] Заявка не отправлена: заполните CONFIG.\n' + text.replace(/<[^>]+>/g, ''));
-      await new Promise(r => setTimeout(r, 900));
+      // ДЕМО-РЕЖИМ: не показываем успех, пока канал отправки не подключён.
+      throw new Error('demo-not-configured');
     }
     goal('form_success');
     form.classList.add('is-sent');
     $('.form-ok', form).focus?.();
   }catch(err){
     btn.classList.remove('is-loading'); btn.disabled = false;
-    $('.form-note').innerHTML = 'Не получилось отправить. Напишите мне в <a href="https://t.me/lanskaya_photo" target="_blank" rel="noopener">Telegram</a>, отвечу сразу.';
+    const note = $('.form-note');
+    note.innerHTML = err?.message === 'demo-not-configured'
+      ? 'Форма пока не подключена. Напишите мне в <a href="https://t.me/lanskaya_photo" target="_blank" rel="noopener">Telegram</a>.'
+      : 'Не удалось отправить заявку. Попробуйте ещё раз или напишите мне в <a href="https://t.me/lanskaya_photo" target="_blank" rel="noopener">Telegram</a>.';
   }
 });
 
