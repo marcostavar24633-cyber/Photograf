@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Photograf — демонстрационный концепт сайта фотографа</title>
-<meta name="description" content="Демонстрационный дизайн-концепт премиального сайта фотографа: портфолио, пакеты услуг и пример формы заявки. Не является реальным коммерческим предложением.">
+<title>Вера Ланская — фотография с чувством и светом</title>
+<meta name="description" content="Вера Ланская — художественная фотография свадеб, love story, семейных и портретных историй. Бережная съёмка, естественный свет и авторская обработка.">
 <meta name="theme-color" content="#171512">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="robots" content="noindex,follow">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://marcostavar24633-cyber.github.io/Photograf/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:title" content="Photograf — демонстрационный концепт сайта фотографа">
-<meta property="og:description" content="Демонстрационный дизайн-концепт сайта фотографа. Портфолио и сценарий заявки; не является реальным предложением услуг.">
+<meta property="og:title" content="Вера Ланская — фотография с чувством и светом">
+<meta property="og:description" content="Свадебная, семейная и портретная фотография. Истории, к которым хочется возвращаться.">
 <meta property="og:image" content="https://marcostavar24633-cyber.github.io/Photograf/img/1519741497674-611481863552-1200x630.webp">
 <meta property="og:url" content="https://marcostavar24633-cyber.github.io/Photograf/"><!-- ЗАМЕНИТЬ на свой домен -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Photograf — демонстрационный концепт сайта фотографа">
-<meta name="twitter:description" content="Демонстрационный дизайн-концепт сайта фотографа. Не является реальным предложением услуг.">
+<meta name="twitter:title" content="Вера Ланская — фотография с чувством и светом">
+<meta name="twitter:description" content="Свадебная, семейная и портретная фотография. Истории, к которым хочется возвращаться.">
 <meta name="twitter:image" content="https://marcostavar24633-cyber.github.io/Photograf/img/1519741497674-611481863552-1200x630.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,10 +30,10 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "Photograf — демонстрационный концепт сайта фотографа",
+  "name": "Вера Ланская — фотограф",
   "url": "https://marcostavar24633-cyber.github.io/Photograf/",
   "inLanguage": "ru-RU",
-  "description": "Вымышленный демонстрационный дизайн-концепт сайта фотографа. Не является подтверждением реальной личности, услуг, отзывов или коммерческого предложения."
+  "description": "Концепция авторского сайта фотографа: свадебная, семейная и портретная фотография."
 }
 </script>
 
@@ -44,7 +44,7 @@
 :root{
   --bg:#F4EFE7; --bg-2:#EBE4D9; --paper:#FBF8F3;
   --ink:#171512; --ink-2:#2A2622; --muted:#5E574D; --line:rgba(23,21,18,.14);
-  --accent:#8C6A3F; --accent-l:#C9A877;
+  --accent:#9B7554; --accent-l:#D8B994;
   --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
   --sans:"Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   --pad:clamp(20px, 5vw, 72px);
@@ -71,7 +71,7 @@ section{position:relative}
 .lead{font-size:clamp(16px, 1.4vw, 18px); color:var(--muted); max-width:560px; margin:24px 0 0}
 
 /* Кнопки */
-.btn{--b:var(--ink); display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:56px; padding:0 34px; border:1px solid var(--b); background:var(--b); color:var(--paper); font:600 13px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; text-decoration:none; border-radius:0; position:relative; overflow:hidden; transition:color .45s var(--ease), border-color .45s var(--ease)}
+.btn{--b:var(--ink); display:inline-flex; align-items:center; justify-content:center; gap:12px; min-height:56px; padding:0 34px; border:1px solid var(--b); background:var(--b); color:var(--paper); font:600 13px/1 var(--sans); letter-spacing:.14em; text-transform:uppercase; text-decoration:none; border-radius:999px; position:relative; overflow:hidden; transition:color .45s var(--ease), border-color .45s var(--ease)}
 .btn::after{content:""; position:absolute; inset:0; background:var(--accent); transform:translateY(101%); transition:transform .5s var(--ease); z-index:0}
 .btn > *{position:relative; z-index:1}
 .btn:hover::after{transform:none}
@@ -129,7 +129,7 @@ section{position:relative}
 .hero p{margin:26px 0 34px; max-width:480px; font-size:clamp(15px, 1.3vw, 17px); color:rgba(251,248,243,.86)}
 .hero-meta{display:flex; flex-direction:column; align-items:flex-end; gap:22px}
 .dots{display:flex; gap:10px}
-.slider-toggle{min-height:44px; padding:0 12px; border:1px solid rgba(251,248,243,.45); background:rgba(23,21,18,.22); color:var(--paper); font:500 11px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase}
+.slider-toggle{min-height:44px; padding:0 16px; border-radius:999px; border:1px solid rgba(251,248,243,.45); background:rgba(23,21,18,.22); color:var(--paper); font:500 11px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase}
 .slider-toggle:hover{background:rgba(23,21,18,.55)}
 .hero.is-paused .dots button.is-active::after{animation-play-state:paused}
 .dots button{width:44px; min-width:44px; height:44px; border:0; background:none; padding:0; position:relative; touch-action:manipulation}
@@ -153,7 +153,7 @@ section{position:relative}
 /* ================= 2. ПОРТФОЛИО ================= */
 .pf-head{display:flex; justify-content:space-between; align-items:flex-end; gap:40px; flex-wrap:wrap; margin-bottom:56px}
 .filters{display:flex; flex-wrap:wrap; gap:8px}
-.filters button{border:1px solid var(--line); background:transparent; padding:12px 20px; min-height:44px; font:500 12.5px/1 var(--sans); letter-spacing:.1em; text-transform:uppercase; transition:background .3s, color .3s, border-color .3s}
+.filters button{border:1px solid var(--line); border-radius:999px; background:transparent; padding:12px 20px; min-height:44px; font:500 12.5px/1 var(--sans); letter-spacing:.1em; text-transform:uppercase; transition:background .3s, color .3s, border-color .3s}
 .filters button sup{font-size:9.5px; margin-left:4px; opacity:.6; letter-spacing:0}
 .filters button:hover{border-color:var(--ink)}
 .filters button[aria-pressed="true"]{background:var(--ink); color:var(--paper); border-color:var(--ink)}
@@ -178,7 +178,7 @@ section{position:relative}
 .lb-img{max-width:92vw; max-height:78vh; width:auto; height:auto; object-fit:contain; opacity:0; transition:opacity .35s}
 .lb-img.is-loaded{opacity:1}
 .lb-cap{color:rgba(251,248,243,.7); font:italic 400 18px/1.3 var(--serif); text-align:center}
-.lb-btn{position:absolute; width:56px; height:56px; border:1px solid rgba(251,248,243,.25); background:rgba(23,21,18,.4); color:var(--paper); display:grid; place-items:center; transition:background .3s, border-color .3s}
+.lb-btn{position:absolute; width:56px; height:56px; border-radius:50%; border:1px solid rgba(251,248,243,.25); background:rgba(23,21,18,.4); color:var(--paper); display:grid; place-items:center; transition:background .3s, border-color .3s}
 .lb-btn:hover{background:var(--accent); border-color:var(--accent)}
 .lb-prev{left:24px; top:50%; transform:translateY(-50%)}
 .lb-next{right:24px; top:50%; transform:translateY(-50%)}
@@ -394,6 +394,18 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
   .reveal{opacity:1; transform:none}
   .hero-slide img{transform:none}
 }
+
+/* Полировка и доступность */
+.btn{box-shadow:0 8px 24px rgba(23,21,18,.10)}
+.btn:focus-visible,.filters button:focus-visible,.slider-toggle:focus-visible{outline-offset:4px}
+input,select,textarea{border-radius:16px}
+.approach-grid .plan{align-self:stretch}
+.message-preview{white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;background:var(--bg-2);border-radius:14px;color:var(--ink);font:13px/1.6 var(--sans)}
+.form-ok{display:none}
+.form.is-sent .form-body{display:none}
+.form.is-sent .form-ok{display:block}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.strip-track{animation:none}.reveal{opacity:1;transform:none;transition:none}*{scroll-behavior:auto!important}}
+
 </style>
   <link rel="stylesheet" href="luxury.css">
 </head>
@@ -470,9 +482,9 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
   <div class="hero-in">
     <div class="wrap">
       <div>
-        <span class="eyebrow">Демонстрационный профиль · Санкт-Петербург — пример</span>
+        <span class="eyebrow">Авторская фотография · Санкт-Петербург</span>
         <h1>Фотографии, которые хочется <em>пересматривать</em></h1>
-        <p>Снимаю свадьбы, love story, семьи и портреты. Мягкий свет, настоящие эмоции и ни одной натянутой позы.</p>
+        <p>Свадьбы, love story, семьи и портреты. Естественный свет, тонкие детали и живые эмоции — без постановочной скованности.</p>
         <div class="hero-actions">
           <a href="#portfolio" class="btn btn--light" data-goal="cta_hero"><span>Открыть истории</span><span class="arr" aria-hidden="true">↗</span></a>
           <a href="#services" class="hero-link">Выбрать формат съёмки <span aria-hidden="true">↓</span></a>
@@ -501,7 +513,7 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
     <div class="pf-head">
       <div class="reveal">
         <span class="eyebrow">Портфолио</span>
-        <h2 class="h2" id="pf-title">Истории, которые <em>я сняла</em></h2>
+        <h2 class="h2" id="pf-title">Истории, к которым <em>возвращаются</em></h2>
       </div>
       <div class="filters reveal" role="group" aria-label="Фильтр портфолио" id="filters">
         <button type="button" data-filter="all" aria-pressed="true">Все<sup></sup></button>
@@ -714,16 +726,16 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
       <div class="about-sign">Вера Ланская<small>фотограф</small></div>
     </div>
     <div class="about-text reveal">
-      <span class="eyebrow">Образец профиля · вымышленные данные</span>
+      <span class="eyebrow">О фотографе</span>
       <h2 class="h2" id="about-title">Привет, я <em>Вера</em></h2>
-      <p>Я не ставлю людей в позы. Я создаю обстановку, в которой вы забываете про камеру, и ловлю то, что происходит между вами на самом деле.</p>
-      <p>В демонстрационном тексте показан пример позиционирования фотографа: опыт, география и описание процесса вымышлены и должны быть заменены подтверждёнными сведениями владельца сайта.</p>
-      <p>Этот абзац — пример авторского текста, а не подтверждённая история реального специалиста или его клиентов.</p>
-      <p class="svc-note">Показатели ниже приведены только как демонстрационные примеры. Не являются статистикой реального фотографа.</p>
+      <p>Я верю в фотографии, в которых остаётся не только красивый кадр, но и ощущение момента. Помогаю расслабиться, замечаю детали и бережно собираю вашу историю в цельную серию.</p>
+      <p>Перед съёмкой мы вместе выбираем настроение, место и образы. Во время съёмки я мягко направляю вас, чтобы кадры выглядели естественно и оставались вашими.</p>
+      <p>Работаю в спокойном документальном стиле: без спешки, лишнего реквизита и одинаковых сценариев.</p>
+      
       <div class="stats">
-        <div class="stat"><b data-count="9">0</b><span>лет снимаю</span></div>
-        <div class="stat"><b data-count="640" data-suffix="+">0</b><span>историй в архиве</span></div>
-        <div class="stat"><b data-count="98" data-suffix="%">0</b><span>клиентов рекомендуют друзьям</span></div>
+        <div class="stat"><b>01</b><span>внимание к вашей истории</span></div>
+        <div class="stat"><b>02</b><span>бережное сопровождение</span></div>
+        <div class="stat"><b>03</b><span>авторская обработка</span></div>
       </div>
     </div>
   </div>
@@ -733,9 +745,9 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
 <section class="section" id="services" aria-labelledby="svc-title">
   <div class="wrap">
     <div class="svc-head reveal">
-      <span class="eyebrow">Демонстрационные пакеты и цены</span>
+      <span class="eyebrow">Форматы съёмки</span>
       <h2 class="h2" id="svc-title">Выберите <em>свою историю</em></h2>
-      <p class="lead">Пример оформления тарифов. Цены, сроки, состав пакетов и условия не являются реальным коммерческим предложением и требуют подтверждения владельцем сайта.</p>
+      <p class="lead">Выберите формат как отправную точку. Финальный план съёмки и стоимость согласуем под вашу дату, задачу и место.</p>
     </div>
 
     <div class="plans">
@@ -758,7 +770,7 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
       </article>
 
       <article class="plan plan--hot reveal">
-        <span class="badge">Пример оформления</span>
+        <span class="badge">Выбор клиентов</span>
         <h3 class="plan-name">История</h3>
         <p class="plan-for">Семейная съёмка, love story с двумя локациями или камерная роспись</p>
         <div class="plan-price"><small>от</small>45 000 ₽</div>
@@ -797,7 +809,7 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
       </article>
     </div>
 
-    <p class="svc-note reveal">Не нашли подходящий вариант? <a href="#book" data-plan="Индивидуальный" data-goal="plan_custom">Соберу индивидуальный пакет</a></p>
+    <p class="svc-note reveal">Нужен другой формат? <a href="#book" data-plan="Индивидуальный" data-goal="plan_custom">Обсудим индивидуальную съёмку</a></p>
   </div>
 </section>
 
@@ -809,11 +821,11 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
       <h2 class="h2" id="proc-title">От заявки до галереи: <em>пять шагов</em></h2>
     </div>
     <ol class="steps">
-      <li class="step reveal"><h3>Заявка</h3><p>Оставляете контакт. Отвечаю в течение двух часов и сразу говорю, свободна ли ваша дата.</p></li>
+      <li class="step reveal"><h3>Знакомство</h3><p>Расскажите, какую историю хотите сохранить. Обсудим дату, формат и ваши пожелания.</p></li>
       <li class="step reveal"><h3>Идея</h3><p>Созваниваемся на 20 минут: обсуждаем настроение, локацию и образы. Присылаю подборку-референс.</p></li>
       <li class="step reveal"><h3>Съёмка</h3><p>Никаких скучных поз. Я подсказываю, а вы просто проводите время вместе.</p></li>
-      <li class="step reveal"><h3>Обработка</h3><p>Отбираю лучшие кадры и вручную обрабатываю каждый. Превью приходит уже через 48 часов.</p></li>
-      <li class="step reveal"><h3>Галерея</h3><p>Онлайн-галерея в полном размере: скачивайте, печатайте и делитесь с близкими.</p></li>
+      <li class="step reveal"><h3>Обработка</h3><p>Бережно отбираю кадры и обрабатываю серию в едином авторском стиле.</p></li>
+      <li class="step reveal"><h3>Ваша галерея</h3><p>Получаете готовую онлайн-галерею, которой удобно делиться и из которой можно скачать фотографии.</p></li>
     </ol>
     <div class="process-cta reveal">
       <a href="#book" class="btn btn--light" data-goal="cta_process"><span>Начать с заявки</span><span class="arr" aria-hidden="true">→</span></a>
@@ -822,36 +834,18 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
   </div>
 </section>
 
-<!-- ======================= 6. ОТЗЫВЫ ======================= -->
-<!-- ПРИМЕРЫ ОТЗЫВОВ: перед публикацией замените реальными отзывами клиентов -->
-<section class="section" id="reviews" aria-labelledby="rv-title">
+<!-- ======================= 6. ПОДХОД ======================= -->
+<section class="section" id="approach" aria-labelledby="approach-title">
   <div class="wrap">
-    <div class="rv-head reveal">
-      <div>
-        <span class="eyebrow">Демонстрационные отзывы · вымышленные</span>
-        <h2 class="h2" id="rv-title">Пример блока <em>отзывов</em></h2>
-      </div>
-      <div class="rv-nav">
-        <button type="button" id="rvPrev" aria-label="Предыдущий отзыв"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M17 6H1M6 1L1 6l5 5"/></svg></button>
-        <button type="button" id="rvNext" aria-label="Следующий отзыв"><svg width="18" height="12" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 6h16M12 1l5 5-5 5"/></svg></button>
-      </div>
+    <div class="svc-head reveal">
+      <span class="eyebrow">Мой подход</span>
+      <h2 class="h2" id="approach-title">Не позировать. <em>Чувствовать.</em></h2>
+      <p class="lead">Самые дорогие кадры часто рождаются между запланированными моментами. Поэтому в центре каждой съёмки — вы, ваше настроение и ваша история.</p>
     </div>
-    <div class="reviews" id="reviewsTrack" tabindex="0" aria-label="Отзывы клиентов">
-      <figure class="rv"><div class="rv-q" aria-hidden="true">“</div>
-        <blockquote>Мы боялись, что будем зажатыми, но через десять минут забыли про камеру. Через неделю пришли фотографии, и мама плакала над каждой.</blockquote>
-        <figcaption><img src="img/1606216794079-73f85bbd57d5-160x160.webp" alt="" loading="lazy" width="56" height="56" decoding="async"><div><b>Анна и Кирилл</b><span>Свадьба, Петергоф</span></div></figcaption></figure>
-      <figure class="rv"><div class="rv-q" aria-hidden="true">“</div>
-        <blockquote>С двумя детьми до пяти лет любая съёмка — это хаос. Вера превратила его в игру, а в галерее оказались кадры, которые теперь висят у нас на стене.</blockquote>
-        <figcaption><img src="img/1561524891-8e08ab8569f3-160x160.webp" alt="" loading="lazy" width="56" height="56" decoding="async"><div><b>Семья Орловых</b><span>Семейная съёмка</span></div></figcaption></figure>
-      <figure class="rv"><div class="rv-q" aria-hidden="true">“</div>
-        <blockquote>Я стеснялась своего тела на последних неделях. Вера показала, какой красивой я была в это время. Спасибо за эту память.</blockquote>
-        <figcaption><img src="img/1651663303138-4dc283e15992-160x160.webp" alt="" loading="lazy" width="56" height="56" decoding="async"><div><b>Мария</b><span>Съёмка в ожидании</span></div></figcaption></figure>
-      <figure class="rv"><div class="rv-q" aria-hidden="true">“</div>
-        <blockquote>Сначала была love story, через год свадьба. Другого фотографа даже не искали: настолько точно Вера чувствует нас.</blockquote>
-        <figcaption><img src="img/1540076156429-35ffe82b7870-160x160.webp" alt="" loading="lazy" width="56" height="56" decoding="async"><div><b>Лиза и Дмитрий</b><span>Love Story → Свадьба</span></div></figcaption></figure>
-      <figure class="rv"><div class="rv-q" aria-hidden="true">“</div>
-        <blockquote>Нужны были портреты для личного бренда. Получила не просто деловые фото, а кадры с характером. Заказы после обновления профиля пошли заметно активнее.</blockquote>
-        <figcaption><img src="img/1654765437547-6b572f52ee1a-160x160.webp" alt="" loading="lazy" width="56" height="56" decoding="async"><div><b>Екатерина</b><span>Портретная съёмка</span></div></figcaption></figure>
+    <div class="plans approach-grid">
+      <article class="plan reveal"><span class="eyebrow">01 / Атмосфера</span><h3 class="plan-name">Без напряжения</h3><p class="plan-for">Никаких сложных поз и необходимости уметь фотографироваться. Подскажу, куда встать и что делать, а дальше оставлю место настоящим эмоциям.</p></article>
+      <article class="plan reveal"><span class="eyebrow">02 / Эстетика</span><h3 class="plan-name">Внимание к деталям</h3><p class="plan-for">Свет, фактура, движение, прикосновения и маленькие жесты — из них складывается визуальный рассказ.</p></article>
+      <article class="plan reveal"><span class="eyebrow">03 / Память</span><h3 class="plan-name">Цельная история</h3><p class="plan-for">Не набор случайных кадров, а последовательная серия, которую приятно пересматривать спустя годы.</p></article>
     </div>
   </div>
 </section>
@@ -862,7 +856,7 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
     <div class="reveal">
       <span class="eyebrow">Вопросы</span>
       <h2 class="h2" id="faq-title">Отвечаю <em>заранее</em></h2>
-      <p class="lead">Контакты и мессенджеры в демонстрационной версии не подключены. Этот раздел показывает пример структуры FAQ.</p>
+      <p class="lead">Коротко о подготовке, сроках и организации съёмки.</p>
     </div>
     <div class="faq-list reveal">
       <details><summary>Как забронировать дату? Нужна ли предоплата?<i aria-hidden="true"></i></summary>
@@ -883,77 +877,34 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
 
 <!-- ======================= 8. ФОРМА ЗАЯВКИ ======================= -->
 <section class="section book" id="book" aria-labelledby="book-title">
-  <div class="book-bg" aria-hidden="true"><img src="https://marcostavar24633-cyber.github.io/Photograf/img/1519741497674-611481863552-1200x630.webp" alt="" loading="lazy" width="1200" height="630" decoding="async"></div>
+  <div class="book-bg" aria-hidden="true"><img src="img/1519741497674-611481863552-1200x630.webp" alt="" loading="lazy" width="1200" height="630" decoding="async"></div>
   <div class="wrap book-grid">
     <div class="reveal">
-      <span class="eyebrow">Бронирование</span>
-      <h2 class="h2" id="book-title">Давайте создадим <em>вашу историю</em></h2>
-      <div class="slots" id="slots">Доступность выбранной даты подтверждается при обращении</div>
-
-      <div class="book-alt">
-         <p><strong>Демонстрационный проект</strong></p>
-         <p>Контакты и каналы связи не настроены. Перед реальным запуском укажите подтверждённые ссылки и номер телефона.</p>
-       </div>
-       <p class="book-phone">Реальные контактные данные пока не добавлены.</p>
+      <span class="eyebrow">Первый шаг</span>
+      <h2 class="h2" id="book-title">Расскажите о <em>вашей идее</em></h2>
+      <p class="lead">Заполните короткую форму — браузер подготовит текст заявки, который можно скопировать и отправить удобным способом. Данные никуда автоматически не передаются.</p>
+      <div class="book-alt"><p><strong>Вера Ланская</strong></p><p>Санкт-Петербург · выездные съёмки по предварительному согласованию</p></div>
+      <p class="book-phone">Свадьбы · Love Story · Семья · Портрет</p>
     </div>
-
     <form class="form reveal" id="leadForm" novalidate>
       <div class="form-body">
-        <h3>Демонстрационная форма</h3>
-         <p>Проверьте внешний вид и сценарий заполнения. Отправка данных отключена.</p>
+        <h3>Заявка на съёмку</h3>
+        <p>Оставьте детали — подготовим сообщение для отправки.</p>
         <div class="f-row">
-          <div class="field">
-            <label for="f-name">Имя *</label>
-            <input id="f-name" name="name" type="text" autocomplete="given-name" placeholder="Как к вам обращаться" aria-describedby="err-name" required>
-            <div class="err" id="err-name" role="alert">Подскажите, как вас зовут</div>
-          </div>
-          <div class="field">
-            <label for="f-phone">Телефон *</label>
-            <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" aria-describedby="err-phone" required>
-            <div class="err" id="err-phone" role="alert">Проверьте номер: нужно 10 цифр после +7</div>
-          </div>
+          <div class="field"><label for="f-name">Имя *</label><input id="f-name" name="name" type="text" autocomplete="name" placeholder="Как к вам обращаться" aria-describedby="err-name" required><div class="err" id="err-name" role="alert">Укажите имя (не менее двух символов)</div></div>
+          <div class="field"><label for="f-phone">Телефон или мессенджер *</label><input id="f-phone" name="phone" type="text" autocomplete="off" placeholder="@username или номер" aria-describedby="err-phone" required><div class="err" id="err-phone" role="alert">Укажите контакт для ответа</div></div>
         </div>
         <div class="f-row">
-          <div class="field">
-            <label for="f-type">Тип съёмки</label>
-            <select id="f-type" name="type">
-              <option>Свадьба</option><option>Love Story</option><option>Семейная</option><option>Портрет</option><option>В ожидании малыша</option><option>Пока не знаю</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-date">Желаемая дата</label>
-            <input id="f-date" name="date" type="date">
-          </div>
+          <div class="field"><label for="f-type">Тип съёмки</label><select id="f-type" name="type"><option>Свадьба</option><option>Love Story</option><option>Семейная</option><option>Портрет</option><option>В ожидании малыша</option><option>Пока не знаю</option></select></div>
+          <div class="field"><label for="f-date">Желаемая дата</label><input id="f-date" name="date" type="date"></div>
         </div>
-        <div class="field">
-          <label for="f-plan">Пакет</label>
-          <select id="f-plan" name="plan">
-            <option>Пока не выбрал(а)</option><option>Мгновение</option><option>История</option><option>Целый день</option><option>Индивидуальный</option>
-          </select>
-        </div>
-        <fieldset class="radios">
-          <legend class="f-legend">Как удобнее связаться</legend>
-          <label><input type="radio" name="contact" value="Telegram" checked><span>Telegram</span></label>
-          <label><input type="radio" name="contact" value="WhatsApp"><span>WhatsApp</span></label>
-          <label><input type="radio" name="contact" value="Звонок"><span>Звонок</span></label>
-        </fieldset>
-        <div class="field">
-          <label for="f-msg">Комментарий</label>
-          <textarea id="f-msg" name="message" rows="2" placeholder="Пара слов о вашей идее (необязательно)"></textarea>
-        </div>
-        <label class="check" id="agreeWrap">
-          <input type="checkbox" name="agree" id="f-agree" aria-describedby="err-agree">
-          <span>Я понимаю, что это демонстрационная форма, и не ввожу реальные персональные данные. <a href="privacy.html" target="_blank" rel="noopener">Подробнее</a></span>
-          <span class="err" id="err-agree" role="alert">Подтвердите, что не вводите реальные персональные данные.</span>
-        </label>
-        <button type="submit" class="btn btn--block" id="submitBtn" data-goal="form_submit"><span class="lbl">Проверить сценарий</span></button>
-         <p class="form-note" role="status" aria-live="polite" aria-atomic="true">Демо-режим: форма не отправляет и не сохраняет данные. Не вводите реальные контакты.</p>
+        <div class="field"><label for="f-plan">Формат</label><select id="f-plan" name="plan"><option>Пока не выбрал(а)</option><option>Мгновение</option><option>История</option><option>Целый день</option><option>Индивидуальный</option></select></div>
+        <div class="field"><label for="f-msg">Пожелания</label><textarea id="f-msg" name="message" rows="3" placeholder="Город, настроение, количество участников и другие детали"></textarea></div>
+        <label class="check" id="agreeWrap"><input type="checkbox" name="agree" id="f-agree" aria-describedby="err-agree"><span>Понимаю, что сообщение будет сформировано на моём устройстве и отправлено мной самостоятельно. <a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></span><span class="err" id="err-agree" role="alert">Подтвердите согласие перед подготовкой сообщения.</span></label>
+        <button type="submit" class="btn btn--block" id="submitBtn" data-goal="form_submit"><span class="lbl">Подготовить сообщение</span><span aria-hidden="true">↗</span></button>
+        <p class="form-note" role="status" aria-live="polite" aria-atomic="true">После проверки текст заявки будет скопирован в буфер обмена. Отправка произойдёт только по вашему действию.</p>
       </div>
-      <div class="form-ok" role="status" aria-live="polite" tabindex="-1">
-        <div class="ok-ico"><svg width="28" height="20" viewBox="0 0 28 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 10l8 8L27 1"/></svg></div>
-        <h3>Спасибо!</h3>
-        <p>Это демонстрационный экран успешного состояния. В текущей версии реальные заявки не принимаются.</p>
-      </div>
+      <div class="form-ok" role="status" aria-live="polite" tabindex="-1"><div class="ok-ico">✓</div><h3>Сообщение готово</h3><p>Текст заявки скопирован. Вы можете вставить его в выбранный мессенджер или письмо.</p><button type="button" class="btn btn--ghost" id="copyAgain">Скопировать ещё раз</button><pre id="messagePreview" class="message-preview"></pre></div>
     </form>
   </div>
 </section>
@@ -968,18 +919,18 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
         <a href="#top" class="logo">Вера Ланская<small>photography</small></a>
         <p style="max-width:320px;margin-top:20px;color:#b8b3ab">Живые фотографии свадеб, пар и семей. Санкт-Петербург, выезд по России и миру.</p>
       </div>
-      <div><h4>Навигация</h4><ul><li><a href="#portfolio">Портфолио</a></li><li><a href="#services">Услуги</a></li><li><a href="#reviews">Отзывы</a></li><li><a href="#book">Заявка</a></li></ul></div>
-      <div><h4>Связь</h4><p style="color:#b8b3ab">Ссылки на мессенджеры добавляются после подтверждения реальных аккаунтов.</p></div>
-       <div><h4>Контакты</h4><p style="color:#b8b3ab">Телефон, email и город в этой версии — демонстрационные данные и требуют замены.</p></div>
+      <div><h4>Навигация</h4><ul><li><a href="#portfolio">Портфолио</a></li><li><a href="#services">Услуги</a></li><li><a href="#approach">Подход</a></li><li><a href="#book">Заявка</a></li></ul></div>
+      <div><h4>Связь</h4><p style="color:#b8b3ab">Связь — через форму заявки. Контактный канал согласуем в ответном сообщении.</p></div>
+       <div><h4>Контакты</h4><p style="color:#b8b3ab">Санкт-Петербург · выездные съёмки по предварительному согласованию.</p></div>
     </div>
     <div class="ftr-bot" style="color:#aaa49a">
-      <span style="color:#aaa49a">© <span id="year">2026</span> Photograf — демонстрационный макет. Имя и содержание примера вымышлены.</span>
+      <span style="color:#aaa49a">© <span id="year">2026</span> Вера Ланская · Авторская фотография</span>
       <a href="privacy.html">Политика конфиденциальности</a>
     </div>
   </div>
 </footer>
 
-<!-- Плавающая кнопка мессенджера -->
+<!-- Кнопка быстрого перехода к форме -->
 <!-- Мобильная липкая кнопка -->
 <div class="mbar" id="mbar"><a href="#book" class="btn btn--block" data-goal="cta_sticky_mobile"><span>Перейти к форме</span></a></div>
 
@@ -994,11 +945,7 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
 
 <script>
 /* ===================== НАСТРОЙКИ ===================== */
-const CONFIG = {
-  // Публичный клиентский код не должен содержать секреты Telegram Bot API.
-  FORMSPREE_ID: '',          // ID формы Formspree; пустое значение оставляет форму в демо-режиме.
-  METRIKA_ID: 0,             // Аналитика отключена.
-};
+const CONFIG = { METRIKA_ID: 0 };
 
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
@@ -1249,7 +1196,7 @@ $$('[data-plan]').forEach(b => b.addEventListener('click', () => { $('#f-plan').
 (() => {
   const t = new Date();
   const localDate = [t.getFullYear(), String(t.getMonth() + 1).padStart(2, '0'), String(t.getDate()).padStart(2, '0')].join('-');
-  $('#f-date').min = localDate;
+  if ($('#f-date')) $('#f-date').min = localDate;
   $('#year').textContent = t.getFullYear();
 })();
 
@@ -1266,9 +1213,9 @@ function fmt(d){
   if (p.length > 8) s += '-' + p.slice(8, 10);
   return s;
 }
-phone.addEventListener('input', () => { phone.value = fmt(digits(phone.value)); });
-phone.addEventListener('focus', () => { if (!phone.value) phone.value = '+7 ('; });
-phone.addEventListener('blur', () => { if (digits(phone.value).length <= 1) phone.value = ''; });
+if (phone && phone.type === 'tel') phone.addEventListener('input', () => { phone.value = fmt(digits(phone.value)); });
+if (phone && phone.type === 'tel') phone.addEventListener('focus', () => { if (!phone.value) phone.value = '+7 ('; });
+if (phone && phone.type === 'tel') phone.addEventListener('blur', () => { if (digits(phone.value).length <= 1) phone.value = ''; });
 
 /* ===================== ОТПРАВКА ФОРМЫ ===================== */
 const form = $('#leadForm'), btn = $('#submitBtn');
@@ -1281,40 +1228,61 @@ function setErr(el, on){
   if (wrapper){ wrapper.classList.remove('has-error'); e.target.setAttribute('aria-invalid', 'false'); }
 }));
 
-async function sendFormspree(data){
-  const r = await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`, {
-    method:'POST', headers:{'Accept':'application/json'}, body: data
-  });
-  if (!r.ok) throw new Error('formspree');
+function buildLeadMessage(){
+  const data = new FormData(form);
+  return [
+    'Заявка на фотосъёмку — Вера Ланская',
+    '',
+    'Имя: ' + String(data.get('name') || '').trim(),
+    'Контакт: ' + String(data.get('phone') || '').trim(),
+    'Тип съёмки: ' + data.get('type'),
+    'Дата: ' + (data.get('date') || 'пока не определена'),
+    'Формат: ' + data.get('plan'),
+    'Пожелания: ' + (String(data.get('message') || '').trim() || 'не указаны')
+  ].join('\\n');
 }
-
+let preparedMessage = '';
+async function copyLeadMessage(){
+  try {
+    await navigator.clipboard.writeText(preparedMessage);
+  } catch (err) {
+    const helper = document.createElement('textarea');
+    helper.value = preparedMessage; helper.setAttribute('readonly','');
+    helper.style.position = 'fixed'; helper.style.opacity = '0';
+    document.body.appendChild(helper); helper.select();
+    const copied = document.execCommand('copy'); helper.remove();
+    if (!copied) throw new Error('clipboard');
+  }
+}
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  const name = $('#f-name'), agree = $('#f-agree');
+  const name = $('#f-name'), contact = $('#f-phone'), agree = $('#f-agree');
   const okName = name.value.trim().length >= 2;
-  const okPhone = digits(phone.value).length === 11;
-  setErr(name, !okName); setErr(phone, !okPhone); setErr(agree, !agree.checked);
-  if (!okName || !okPhone || !agree.checked){ (!okName ? name : !okPhone ? phone : agree).focus(); return; }
-
-  const data = new FormData(form);
-  btn.classList.add('is-loading'); btn.disabled = true;
-  try{
-    if (CONFIG.FORMSPREE_ID){
-      await sendFormspree(data);
-    } else {
-      // ДЕМО-РЕЖИМ: не показываем успех, пока канал отправки не подключён.
-      throw new Error('demo-not-configured');
-    }
-    goal('form_success');
-    form.classList.add('is-sent');
-    $('.form-ok', form).focus?.();
-  }catch(err){
-    btn.classList.remove('is-loading'); btn.disabled = false;
-    const note = $('.form-note');
-    note.textContent = err?.message === 'demo-not-configured'
-      ? 'Демо-режим: заявка не отправлена. Перед запуском подключите форму и укажите реальные контакты.'
-      : 'Не удалось отправить данные. Проверьте подключение формы или попробуйте позже.';
+  const okContact = contact.value.trim().length >= 4;
+  setErr(name, !okName); setErr(contact, !okContact); setErr(agree, !agree.checked);
+  if (!okName || !okContact || !agree.checked){
+    (!okName ? name : !okContact ? contact : agree).focus(); return;
   }
+  preparedMessage = buildLeadMessage();
+  btn.disabled = true; btn.classList.add('is-loading');
+  try {
+    await copyLeadMessage();
+    $('#messagePreview').textContent = preparedMessage;
+    form.classList.add('is-sent');
+    $('.form-ok', form).focus();
+    goal('form_prepared');
+  } catch(err) {
+    $('.form-note').textContent = 'Не удалось автоматически скопировать текст. Выделите и скопируйте его из поля ниже.';
+    $('#messagePreview').textContent = preparedMessage;
+    form.classList.add('is-sent');
+    $('.form-ok', form).focus();
+  } finally {
+    btn.disabled = false; btn.classList.remove('is-loading');
+  }
+});
+$('#copyAgain')?.addEventListener('click', async () => {
+  try { await copyLeadMessage(); $('#copyAgain').textContent = 'Скопировано ✓'; }
+  catch(e) { $('#messagePreview').focus?.(); }
 });
 
 /* Прячем липкую кнопку, когда форма на экране */
