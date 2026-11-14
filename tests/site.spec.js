@@ -4,6 +4,9 @@ test('page structure, internal links and local images are valid', async ({ page 
   await page.goto('/');
   await expect(page).toHaveTitle(/Вера Ланская/);
 
+  const heroEyebrowTop = await page.locator('.hero .eyebrow').evaluate(el => el.getBoundingClientRect().top);
+  expect(heroEyebrowTop).toBeGreaterThan(80);
+
   const audit = await page.evaluate(() => {
     const ids = [...document.querySelectorAll('[id]')].map(el => el.id);
     const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
