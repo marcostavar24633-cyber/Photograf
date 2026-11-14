@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test('page structure, internal links and local images are valid', async ({ page }) => {
   await page.goto('/');
-  await expect(page).toHaveTitle(/Photograf/);
+  await expect(page).toHaveTitle(/Вера Ланская/);
 
   const audit = await page.evaluate(() => {
     const ids = [...document.querySelectorAll('[id]')].map(el => el.id);
@@ -71,15 +71,15 @@ test('mobile navigation remains usable at narrow viewport', async ({ page }) => 
   await page.screenshot({ path: 'test-results/photograf-mobile.png', fullPage: true });
 });
 
-test('demo safeguards stay enabled', async ({ page }) => {
+test('indexing, local-only form and analytics safeguards are correct', async ({ page }) => {
   await page.goto('/');
   const safeguards = await page.evaluate(() => ({
-    noindex: document.querySelector('meta[name="robots"]')?.content,
+    robots: document.querySelector('meta[name="robots"]')?.content,
     formspreeDisabled: /FORMSPREE_ID:\s*''/.test(document.querySelectorAll('script')[1]?.textContent || ''),
     analyticsDisabled: /METRIKA_ID:\s*0/.test(document.querySelectorAll('script')[1]?.textContent || '')
   }));
-  expect(safeguards.noindex).toBe('noindex,follow');
-  expect(safeguards.formspreeDisabled).toBe(true);
+  expect(safeguards.robots).toBe('index,follow,max-image-preview:large');
+  expect(safeguards.localOnlyForm).toBe(true);
   expect(safeguards.analyticsDisabled).toBe(true);
 });
 
