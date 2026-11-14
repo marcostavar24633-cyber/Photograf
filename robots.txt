@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://marcostavar24633-cyber.github.io/Photograf/sitemap.xml
