@@ -905,7 +905,7 @@ input,select,textarea{border-radius:16px}
         <button type="submit" class="btn btn--block" id="submitBtn" data-goal="form_submit"><span class="lbl">Подготовить сообщение</span><span aria-hidden="true">↗</span></button>
         <p class="form-note" role="status" aria-live="polite" aria-atomic="true">После проверки текст заявки будет скопирован в буфер обмена. Отправка произойдёт только по вашему действию.</p>
       </div>
-      <div class="form-ok" role="status" aria-live="polite" tabindex="-1"><div class="ok-ico">✓</div><h3>Сообщение готово</h3><p>Текст заявки скопирован. Вы можете вставить его в выбранный мессенджер или письмо.</p><button type="button" class="btn btn--ghost" id="copyAgain">Скопировать ещё раз</button><pre id="messagePreview" class="message-preview"></pre></div>
+      <div class="form-ok" role="status" aria-live="polite" tabindex="-1"><div class="ok-ico">✓</div><h3>Сообщение готово</h3><p id="formResultMessage">Текст заявки будет подготовлен для отправки вами самостоятельно.</p><button type="button" class="btn btn--ghost" id="copyAgain">Скопировать ещё раз</button><pre id="messagePreview" class="message-preview" tabindex="0"></pre></div>
     </form>
   </div>
 </section>
@@ -1234,7 +1234,7 @@ function buildLeadMessage(){
     'Дата: ' + (data.get('date') || 'пока не определена'),
     'Формат: ' + data.get('plan'),
     'Пожелания: ' + (String(data.get('message') || '').trim() || 'не указаны')
-  ].join('\\n');
+  ].join('\n');
 }
 let preparedMessage = '';
 async function copyLeadMessage(){
@@ -1262,12 +1262,14 @@ form.addEventListener('submit', async e => {
   btn.disabled = true; btn.classList.add('is-loading');
   try {
     await copyLeadMessage();
+    $('#formResultMessage').textContent = 'Текст заявки скопирован. Теперь вы можете вставить его в выбранный мессенджер или письмо.';
     $('#messagePreview').textContent = preparedMessage;
     form.classList.add('is-sent');
     $('.form-ok', form).focus();
     goal('form_prepared');
   } catch(err) {
-    $('.form-note').textContent = 'Не удалось автоматически скопировать текст. Выделите и скопируйте его из поля ниже.';
+    $('.form-note').textContent = 'Автоматическое копирование недоступно. Текст можно скопировать вручную из поля ниже.';
+    $('#formResultMessage').textContent = 'Текст подготовлен, но браузер не разрешил автоматическое копирование. Скопируйте его вручную из поля ниже.';
     $('#messagePreview').textContent = preparedMessage;
     form.classList.add('is-sent');
     $('.form-ok', form).focus();
