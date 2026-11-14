@@ -1010,13 +1010,17 @@ menuLinks.forEach(a => a.addEventListener('click', () => { setMenu(false); burge
 addEventListener('keydown', e => {
   if (!document.body.classList.contains('menu-open')) return;
   if (e.key === 'Escape') { setMenu(false); burger.focus(); return; }
-  if (e.key === 'Tab' && menuLinks.length){
-    const first = menuLinks[0], last = menuLinks[menuLinks.length - 1];
-    if (e.shiftKey && (document.activeElement === first || document.activeElement === burger)){
-      e.preventDefault(); last.focus();
-    } else if (!e.shiftKey && (document.activeElement === last || document.activeElement === burger)){
-      e.preventDefault(); first.focus();
-    }
+  if (e.key !== 'Tab' || !menuLinks.length) return;
+  const focusable = $('#mnav a[href], #mnav button:not([disabled]), #mnav [tabindex]:not([tabindex="-1"])')
+    .filter(el => el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden');
+  if (!focusable.length) { e.preventDefault(); burger.focus(); return; }
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && (document.activeElement === first || document.activeElement === burger)){
+    e.preventDefault(); last.focus();
+  } else if (!e.shiftKey && (document.activeElement === last || document.activeElement === burger)){
+    e.preventDefault(); first.focus();
+  } else if (!focusable.includes(document.activeElement)){
+    e.preventDefault(); (e.shiftKey ? last : first).focus();
   }
 });
 
