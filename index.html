@@ -878,13 +878,13 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
         <div class="f-row">
           <div class="field">
             <label for="f-name">Имя *</label>
-            <input id="f-name" name="name" type="text" autocomplete="given-name" placeholder="Как к вам обращаться" required>
-            <div class="err" role="alert">Подскажите, как вас зовут</div>
+            <input id="f-name" name="name" type="text" autocomplete="given-name" placeholder="Как к вам обращаться" aria-describedby="err-name" required>
+            <div class="err" id="err-name" role="alert">Подскажите, как вас зовут</div>
           </div>
           <div class="field">
             <label for="f-phone">Телефон *</label>
-            <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
-            <div class="err" role="alert">Проверьте номер: нужно 10 цифр после +7</div>
+            <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" aria-describedby="err-phone" required>
+            <div class="err" id="err-phone" role="alert">Проверьте номер: нужно 10 цифр после +7</div>
           </div>
         </div>
         <div class="f-row">
@@ -916,13 +916,14 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
           <textarea id="f-msg" name="message" rows="2" placeholder="Пара слов о вашей идее (необязательно)"></textarea>
         </div>
         <label class="check" id="agreeWrap">
-          <input type="checkbox" name="agree" id="f-agree">
+          <input type="checkbox" name="agree" id="f-agree" aria-describedby="err-agree">
           <span>Я понимаю, что это демонстрационная форма, и не ввожу реальные персональные данные. <a href="privacy.html" target="_blank" rel="noopener">Подробнее</a></span>
+          <span class="err" id="err-agree" role="alert">Подтвердите, что не вводите реальные персональные данные.</span>
         </label>
         <button type="submit" class="btn btn--block" id="submitBtn" data-goal="form_submit"><span class="lbl">Проверить сценарий</span></button>
          <p class="form-note">Демо-режим: форма не отправляет и не сохраняет данные. Не вводите реальные контакты.</p>
       </div>
-      <div class="form-ok" role="status" aria-live="polite">
+      <div class="form-ok" role="status" aria-live="polite" tabindex="-1">
         <div class="ok-ico"><svg width="28" height="20" viewBox="0 0 28 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 10l8 8L27 1"/></svg></div>
         <h3>Спасибо!</h3>
         <p>Это демонстрационный экран успешного состояния. В текущей версии реальные заявки не принимаются.</p>
@@ -1204,8 +1205,14 @@ phone.addEventListener('blur', () => { if (digits(phone.value).length <= 1) phon
 
 /* ===================== ОТПРАВКА ФОРМЫ ===================== */
 const form = $('#leadForm'), btn = $('#submitBtn');
-function setErr(el, on){ el.closest('.field, .check').classList.toggle('has-error', on); el.setAttribute('aria-invalid', on); }
-['input', 'change'].forEach(ev => form.addEventListener(ev, e => { const w = e.target.closest('.has-error'); if (w) w.classList.remove('has-error'); }));
+function setErr(el, on){
+  el.closest('.field, .check').classList.toggle('has-error', on);
+  el.setAttribute('aria-invalid', String(on));
+}
+['input', 'change'].forEach(ev => form.addEventListener(ev, e => {
+  const wrapper = e.target.closest('.has-error');
+  if (wrapper){ wrapper.classList.remove('has-error'); e.target.setAttribute('aria-invalid', 'false'); }
+}));
 
 async function sendFormspree(data){
   const r = await fetch(`https://formspree.io/f/${CONFIG.FORMSPREE_ID}`, {
@@ -1223,9 +1230,6 @@ form.addEventListener('submit', async e => {
   if (!okName || !okPhone || !agree.checked){ (!okName ? name : !okPhone ? phone : agree).focus(); return; }
 
   const data = new FormData(form);
-  const esc = s => String(s || '—').replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]));
-  const text = `📸 <b>Новая заявка с сайта</b>\n\n👤 ${esc(data.get('name'))}\n📞 ${esc(data.get('phone'))}\n🎞 ${esc(data.get('type'))}\n📅 ${esc(data.get('date'))}\n💼 Пакет: ${esc(data.get('plan'))}\n💬 Связь: ${esc(data.get('contact'))}\n✍️ ${esc(data.get('message'))}`;
-
   btn.classList.add('is-loading'); btn.disabled = true;
   try{
     if (CONFIG.FORMSPREE_ID){
