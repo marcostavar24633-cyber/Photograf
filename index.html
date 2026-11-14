@@ -1182,13 +1182,7 @@ const cio = new IntersectionObserver(entries => entries.forEach(en => {
 }), {threshold:.6});
 $$('[data-count]').forEach(el => cio.observe(el));
 
-/* ===================== ОТЗЫВЫ ===================== */
-(() => {
-  const tr = $('#reviewsTrack');
-  const step = () => tr.querySelector('.rv').offsetWidth + 20;
-  $('#rvNext').onclick = () => tr.scrollBy({left: tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 5 ? -tr.scrollWidth : step(), behavior:'smooth'});
-  $('#rvPrev').onclick = () => tr.scrollBy({left: -step(), behavior:'smooth'});
-})();
+/* Блок отзывов заменён разделом «Мой подход»; неиспользуемые обработчики удалены. */
 
 /* ===================== ПАКЕТ → ФОРМА ===================== */
 $$('[data-plan]').forEach(b => b.addEventListener('click', () => { $('#f-plan').value = b.dataset.plan; }));
