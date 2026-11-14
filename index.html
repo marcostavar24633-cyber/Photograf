@@ -128,6 +128,9 @@ section{position:relative}
 .hero p{margin:26px 0 34px; max-width:480px; font-size:clamp(15px, 1.3vw, 17px); color:rgba(251,248,243,.86)}
 .hero-meta{display:flex; flex-direction:column; align-items:flex-end; gap:22px}
 .dots{display:flex; gap:10px}
+.slider-toggle{min-height:44px; padding:0 12px; border:1px solid rgba(251,248,243,.45); background:rgba(23,21,18,.22); color:var(--paper); font:500 11px/1 var(--sans); letter-spacing:.12em; text-transform:uppercase}
+.slider-toggle:hover{background:rgba(23,21,18,.55)}
+.hero.is-paused .dots button.is-active::after{animation-play-state:paused}
 .dots button{width:44px; min-width:44px; height:44px; border:0; background:none; padding:0; position:relative; touch-action:manipulation}
 .dots button::before{content:""; position:absolute; left:0; right:0; top:50%; height:1.5px; background:rgba(251,248,243,.35)}
 .dots button::after{content:""; position:absolute; left:0; top:50%; height:1.5px; width:0; background:var(--paper)}
@@ -452,6 +455,7 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
       </div>
       <div class="hero-meta">
         <div class="dots" id="dots" role="group" aria-label="Переключение фотографий"></div>
+        <button class="slider-toggle" id="heroToggle" type="button" aria-pressed="false" aria-label="Остановить автоматическую смену фотографий">Пауза</button>
         <div class="counter-h" id="heroCount" aria-hidden="true">01 / 04</div>
       </div>
     </div>
@@ -1006,12 +1010,15 @@ function setMenu(open){
   document.body.style.overflow = open ? 'hidden' : '';
 }
 burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-$$('#mnav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+$('#mnav a').forEach(a => a.addEventListener('click', () => { setMenu(false); burger.focus(); }));
+addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.body.classList.contains('menu-open')) { setMenu(false); burger.focus(); }
+});
 
 /* ===================== HERO-СЛАЙДЕР ===================== */
 (() => {
-  const slides = $$('.hero-slide'), dots = $('#dots'), cnt = $('#heroCount');
-  let i = 0, timer;
+  const slides = $('.hero-slide'), dots = $('#dots'), cnt = $('#heroCount'), toggle = $('#heroToggle');
+  let i = 0, timer, paused = false;
   slides.forEach((_, k) => {
     const b = document.createElement('button');
     b.type = 'button'; b.setAttribute('aria-label', 'Показать фотографию ' + (k + 1)); b.setAttribute('aria-pressed', 'false');
@@ -1067,7 +1074,17 @@ $$('#mnav a').forEach(a => a.addEventListener('click', () => setMenu(false)));
     cnt.textContent = pad(i + 1) + ' / ' + pad(slides.length);
     if (user) start();
   }
-  function start(){ clearInterval(timer); if (!reduceMotion) timer = setInterval(() => go(i + 1), 6000); }
+  function stop(){ clearInterval(timer); timer = null; }
+  function start(){ stop(); if (!reduceMotion && !paused) timer = setInterval(() => go(i + 1), 6000); }
+  function setPaused(value){
+    paused = value; stop(); hero.classList.toggle('is-paused', paused);
+    toggle.setAttribute('aria-pressed', String(paused));
+    toggle.setAttribute('aria-label', paused ? 'Возобновить автоматическую смену фотографий' : 'Остановить автоматическую смену фотографий');
+    toggle.textContent = paused ? 'Продолжить' : 'Пауза';
+    if (!paused) start();
+  }
+  toggle.addEventListener('click', () => setPaused(!paused));
+  if (reduceMotion) { paused = true; toggle.setAttribute('aria-pressed', 'true'); toggle.setAttribute('aria-label', 'Автоматическая смена фотографий отключена из-за настройки уменьшения движения'); toggle.textContent = 'Пауза'; hero.classList.add('is-paused'); }
   go(0); start();
 })();
 
