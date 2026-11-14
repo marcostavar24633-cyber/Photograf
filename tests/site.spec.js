@@ -78,7 +78,7 @@ test('indexing, local-only form and analytics safeguards are correct', async ({ 
     localOnlyForm: /navigator\.clipboard\.writeText/.test(document.querySelectorAll('script')[1]?.textContent || '') && !/fetch\(/.test(document.querySelectorAll('script')[1]?.textContent || ''),
     analyticsDisabled: /METRIKA_ID:\s*0/.test(document.querySelectorAll('script')[1]?.textContent || '')
   }));
-  expect(safeguards.robots).toBe('index,follow,max-image-preview:large');
+  expect(safeguards.robots).toBe('noindex,follow');
   expect(safeguards.localOnlyForm).toBe(true);
   expect(safeguards.analyticsDisabled).toBe(true);
 });
