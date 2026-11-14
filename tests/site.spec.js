@@ -100,7 +100,7 @@ test('lead form prepares a readable multiline message without submitting data to
   await expect(page.locator('.form-ok')).toBeVisible();
   const message = await page.locator('#messagePreview').textContent();
   expect(message).toContain('Имя: Мария');
-  expect(message).toContain('\nКонтакт:');
+  expect(message).toContain('Контакт: @maria_photo');
   expect(message).toContain('\nКонтакт:');
   expect(message).not.toContain('\\n');
   expect(nonGetRequests).toEqual([]);
