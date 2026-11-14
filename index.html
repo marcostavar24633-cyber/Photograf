@@ -402,25 +402,44 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
 <a class="skip-link" href="#top">Перейти к содержимому</a>
 <header class="hdr" id="hdr">
   <div class="wrap">
-    <a href="#top" class="logo" aria-label="Вера Ланская — на главную">Вера Ланская<small>photography</small></a>
-    <nav class="nav" aria-label="Основное меню">
-      <a href="#portfolio">Портфолио</a>
-      <a href="#about">Обо мне</a>
-      <a href="#services">Услуги</a>
-      <a href="#reviews">Отзывы</a>
-      <a href="#book">Контакты</a>
-    </nav>
-    <a href="#book" class="btn hdr-cta" data-goal="cta_header"><span>Перейти к форме</span></a>
-    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span></button>
+    <a href="#top" class="logo" aria-label="Photograf — на главную">Photograf<small>visual stories</small></a>
+    <span class="hdr-note">ИСТОРИИ В СВЕТЕ И ЧУВСТВАХ</span>
+    <a href="#book" class="btn hdr-cta" data-goal="cta_header"><span>Обсудить съёмку</span><span class="arr" aria-hidden="true">↗</span></a>
+    <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span><b>МЕНЮ</b></button>
   </div>
 </header>
-<nav class="mnav" id="mnav" aria-label="Мобильное меню">
-  <a href="#portfolio">Портфолио</a>
-  <a href="#about">Обо мне</a>
-  <a href="#services">Услуги</a>
-  <a href="#reviews">Отзывы</a>
-  <a href="#book">Контакты</a>
-  <a href="#book" data-goal="cta_mobile_menu">Перейти к форме →</a>
+<nav class="mnav" id="mnav" aria-label="Главная навигация" aria-hidden="true">
+  <div class="mnav-shell">
+    <div class="mnav-head">
+      <a href="#top" class="mnav-brand">Photograf <span>VISUAL STORIES</span></a>
+      <button class="mnav-close" id="menuClose" type="button" aria-label="Закрыть меню">ЗАКРЫТЬ <span aria-hidden="true">×</span></button>
+    </div>
+    <div class="mnav-grid">
+      <div class="mnav-group">
+        <span class="mnav-kicker">01 / ИЗБРАННОЕ</span>
+        <a class="mnav-feature" href="#portfolio">Портфолио <span>↗</span></a>
+        <a href="#portfolio" data-menu-filter="wedding">Свадебные истории</a>
+        <a href="#portfolio" data-menu-filter="love">Love Story</a>
+        <a href="#portfolio" data-menu-filter="family">Семейные съёмки</a>
+        <a href="#portfolio" data-menu-filter="portrait">Портрет</a>
+        <a href="#portfolio" data-menu-filter="expecting">В ожидании чуда</a>
+      </div>
+      <div class="mnav-group">
+        <span class="mnav-kicker">02 / СТУДИЯ</span>
+        <a href="#about">Философия</a>
+        <a href="#services">Форматы и пакеты</a>
+        <a href="#process">Как это работает</a>
+        <a href="#reviews">Впечатления</a>
+        <a href="#faq">Вопросы и ответы</a>
+      </div>
+      <div class="mnav-aside">
+        <span class="mnav-kicker">03 / СЛЕДУЮЩИЙ ШАГ</span>
+        <p>У каждой истории свой свет. Давайте найдём тот, который подходит вам.</p>
+        <a class="mnav-cta" href="#book" data-goal="cta_mobile_menu">Обсудить съёмку <span>↗</span></a>
+        <span class="mnav-footnote">PHOTOGRAF / EDITORIAL CONCEPT</span>
+      </div>
+    </div>
+  </div>
 </nav>
 
 <main id="top">
@@ -453,7 +472,10 @@ body.hero-light:not(.menu-open) .hdr:not(.is-scrolled) .hdr-cta{--b:var(--ink); 
         <span class="eyebrow">Демонстрационный профиль · Санкт-Петербург — пример</span>
         <h1>Фотографии, которые хочется <em>пересматривать</em></h1>
         <p>Снимаю свадьбы, love story, семьи и портреты. Мягкий свет, настоящие эмоции и ни одной натянутой позы.</p>
-        <a href="#book" class="btn btn--light" data-goal="cta_hero"><span>Посмотреть форму</span><span class="arr" aria-hidden="true">→</span></a>
+        <div class="hero-actions">
+          <a href="#portfolio" class="btn btn--light" data-goal="cta_hero"><span>Открыть истории</span><span class="arr" aria-hidden="true">↗</span></a>
+          <a href="#services" class="hero-link">Выбрать формат съёмки <span aria-hidden="true">↓</span></a>
+        </div>
       </div>
       <div class="hero-meta">
         <div class="dots" id="dots" role="group" aria-label="Переключение фотографий"></div>
@@ -997,16 +1019,30 @@ function onScroll(){
 addEventListener('scroll', onScroll, {passive:true}); onScroll();
 
 const burger = $('#burger');
-const menuLinks = $$('#mnav a');
+const menu = $('#mnav');
+const menuClose = $('#menuClose');
+const menuLinks = $('#mnav a');
 function setMenu(open){
   document.body.classList.toggle('menu-open', open);
-  burger.setAttribute('aria-expanded', open);
+  burger.setAttribute('aria-expanded', String(open));
   burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+  menu.setAttribute('aria-hidden', String(!open));
   document.body.style.overflow = open ? 'hidden' : '';
   if (open) menuLinks[0]?.focus();
 }
+function closeMenu(){
+  setMenu(false);
+  burger.focus();
+}
 burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-menuLinks.forEach(a => a.addEventListener('click', () => { setMenu(false); burger.focus(); }));
+menuClose.addEventListener('click', closeMenu);
+menu.addEventListener('click', e => { if (e.target === menu) closeMenu(); });
+menuLinks.forEach(a => a.addEventListener('click', () => {
+  const filter = a.dataset.menuFilter;
+  if (filter) $('#filters button[data-filter="' + filter + '"]')?.click();
+  setMenu(false);
+  burger.focus();
+}));
 addEventListener('keydown', e => {
   if (!document.body.classList.contains('menu-open')) return;
   if (e.key === 'Escape') { setMenu(false); burger.focus(); return; }
@@ -1127,10 +1163,19 @@ $$('#filters button').forEach(b => {
   function show(k){
     idx = (k + list.length) % list.length;
     const b = list[idx], alt = $('img', b).alt;
-    img.classList.remove('is-loaded');
-    img.onload = () => img.classList.add('is-loaded');
-    img.src = b.dataset.full; img.alt = alt;
+    img.classList.remove('is-loaded','is-error');
+    img.onload = () => {
+      img.classList.remove('is-error');
+      img.classList.add('is-loaded');
+    };
+    img.onerror = () => {
+      img.classList.remove('is-loaded');
+      img.classList.add('is-error');
+      cap.textContent = 'Не удалось загрузить фотографию. Перейдите к следующему кадру или закройте просмотр.';
+    };
     cap.textContent = alt;
+    img.alt = alt;
+    img.src = b.dataset.full;
     count.textContent = (idx + 1) + ' / ' + list.length;
     // предзагрузка соседей
     [idx + 1, idx - 1].forEach(n => { const p = list[(n + list.length) % list.length]; if (p) new Image().src = p.dataset.full; });
