@@ -408,6 +408,7 @@ input,select,textarea{border-radius:16px}
 
 </style>
   <link rel="stylesheet" href="luxury.css">
+<link rel="stylesheet" href="motion.css">
 </head>
 <body>
 
@@ -1285,5 +1286,6 @@ $('#copyAgain')?.addEventListener('click', async () => {
 /* Прячем липкую кнопку, когда форма на экране */
 new IntersectionObserver(([en]) => { formVisible = en.isIntersecting; onScroll(); }, {threshold:.15}).observe($('#book'));
 </script>
+<script src="motion.js" defer></script>
 </body>
 </html>
