@@ -1011,7 +1011,7 @@ addEventListener('keydown', e => {
   if (!document.body.classList.contains('menu-open')) return;
   if (e.key === 'Escape') { setMenu(false); burger.focus(); return; }
   if (e.key !== 'Tab' || !menuLinks.length) return;
-  const focusable = $('#mnav a[href], #mnav button:not([disabled]), #mnav [tabindex]:not([tabindex="-1"])')
+  const focusable = $$('#mnav a[href], #mnav button:not([disabled]), #mnav [tabindex]:not([tabindex="-1"])')
     .filter(el => el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden');
   if (!focusable.length) { e.preventDefault(); burger.focus(); return; }
   const first = focusable[0], last = focusable[focusable.length - 1];
