@@ -1,0 +1,78 @@
+/* PHOTOGRAF — MOTION DESIGN ENGINE PRO
+   Lightweight, dependency-free motion layer. */
+:root{
+  --motion-ease:cubic-bezier(.2,.72,.18,1);
+  --motion-gold:rgba(218,190,145,.72);
+}
+html{scroll-behavior:smooth}
+.motion-progress{
+  position:fixed;z-index:250;inset:0 auto auto 0;width:0;height:2px;
+  background:linear-gradient(90deg,#98784d,#ead4ad);
+  box-shadow:0 0 14px rgba(218,190,145,.4);pointer-events:none;
+  transform-origin:left center;
+}
+.hero{isolation:isolate}
+.hero::before{
+  content:"";position:absolute;inset:-12%;z-index:1;pointer-events:none;
+  background:radial-gradient(ellipse at var(--motion-x,50%) var(--motion-y,42%),rgba(213,184,137,.17),transparent 34%);
+  opacity:.85;mix-blend-mode:screen;transition:opacity .5s ease;
+}
+.hero-in{z-index:3}
+.hero .eyebrow,.hero h1,.hero p,.hero-actions,.hero-meta{
+  animation:motionHeroIn 1.05s var(--motion-ease) both;
+}
+.hero h1{animation-delay:.12s}
+.hero p{animation-delay:.22s}
+.hero-actions{animation-delay:.32s}
+.hero-meta{animation-delay:.42s}
+@keyframes motionHeroIn{
+  from{opacity:0;transform:translate3d(0,24px,0);filter:blur(5px)}
+  to{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+}
+.hero-slide img{will-change:transform}
+.g-item.reveal img{
+  clip-path:inset(0 0 7% 0 round 2px);
+  transition:clip-path 1s var(--motion-ease),transform 1.15s var(--motion-ease),filter .7s ease;
+}
+.g-item.reveal.is-in img{clip-path:inset(0 round 2px)}
+.g-btn img{backface-visibility:hidden}
+.g-btn:hover img{filter:saturate(1.04) contrast(1.02)}
+.btn,.hdr-cta,.hero-link,.filters button,.lb-btn{
+  -webkit-tap-highlight-color:transparent;
+  transform:translateZ(0);
+}
+.btn,.hdr-cta{will-change:translate}
+.btn:focus-visible,.hdr-cta:focus-visible{translate:0 0!important}
+.btn::before{
+  content:"";position:absolute;inset:1px;border:1px solid rgba(255,255,255,.13);
+  border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .45s ease;z-index:1;
+}
+.btn:hover::before{opacity:1}
+.btn .arr,.hero-link span{display:inline-block;transition:transform .45s var(--motion-ease)}
+.plan,.about-photo,.mnav-aside,.g-item{transform-style:preserve-3d}
+.plan{transition:transform .65s var(--motion-ease),box-shadow .65s var(--motion-ease),border-color .45s ease}
+.plan:hover{transform:translateY(-7px)}
+.mnav .mnav-group a{transition:color .3s ease,transform .55s var(--motion-ease)}
+.menu-open .mnav .mnav-group a{animation:motionMenuIn .65s var(--motion-ease) both}
+.menu-open .mnav .mnav-group:nth-child(2) a{animation-delay:.06s}
+.menu-open .mnav .mnav-group:nth-child(3) a{animation-delay:.12s}
+@keyframes motionMenuIn{from{opacity:0;transform:translate3d(0,14px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
+.lb.is-open .lb-fig{animation:motionLightboxIn .55s var(--motion-ease) both}
+@keyframes motionLightboxIn{from{opacity:0;transform:scale(.965) translateY(12px);filter:blur(5px)}to{opacity:1;transform:scale(1) translateY(0);filter:blur(0)}}
+.strip-track{will-change:transform}
+@media (hover:hover) and (pointer:fine){
+  .g-btn{perspective:900px}
+  .g-btn img{rotate:var(--motion-tilt,0deg);transition:rotate .35s var(--motion-ease),clip-path 1s var(--motion-ease),transform 1.15s var(--motion-ease),filter .7s ease}
+}
+@media (max-width:760px){
+  .hero::before{opacity:.45}
+  .hero .eyebrow,.hero h1,.hero p,.hero-actions,.hero-meta{animation-duration:.75s;filter:none}
+  .motion-progress{height:2px}
+}
+@media (prefers-reduced-motion:reduce){
+  .motion-progress{display:none}
+  .hero::before{display:none}
+  .hero .eyebrow,.hero h1,.hero p,.hero-actions,.hero-meta{animation:none!important}
+  .g-item.reveal img{clip-path:none!important;transition:none!important}
+  .lb.is-open .lb-fig,.menu-open .mnav .mnav-group a{animation:none!important}
+}
