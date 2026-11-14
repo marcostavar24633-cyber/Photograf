@@ -983,12 +983,11 @@ document.addEventListener('click', e => { const g = e.target.closest('[data-goal
 document.querySelector('#leadForm').addEventListener('submit', () => goal('form_submit'));
 
 /* ===================== ШАПКА + МЕНЮ ===================== */
-const hdr = $('#hdr'), fab = $('#fab'), mbar = $('#mbar');
+const hdr = $('#hdr'), mbar = $('#mbar');
 let formVisible = false;
 function onScroll(){
   const y = scrollY, h = innerHeight;
   hdr.classList.toggle('is-scrolled', y > 40);
-  fab.classList.toggle('is-on', y > h * .8);
   mbar.classList.toggle('is-on', y > h * .8 && !formVisible);
 }
 addEventListener('scroll', onScroll, {passive:true}); onScroll();
