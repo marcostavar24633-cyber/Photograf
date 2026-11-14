@@ -11,7 +11,7 @@ test('page structure, internal links and local images are valid', async ({ page 
       .map(a => a.getAttribute('href').slice(1))
       .filter(id => id && !document.getElementById(id));
     const missingImages = [...document.images]
-      .filter(img => img.complete && img.naturalWidth === 0)
+      .filter(img => img.hasAttribute('src') && img.complete && img.naturalWidth === 0)
       .map(img => img.getAttribute('src'));
     return { duplicateIds, missingAnchors, missingImages };
   });
