@@ -893,3 +893,13 @@ body::after{
 @media(prefers-reduced-motion:reduce){
   body::after{display:none}
 }
+
+
+/* WCAG AA: footer text contrast and readable legal line */
+.ftr-top > div > p,
+.ftr-bot {
+  color: #b8b3ab;
+}
+.ftr-bot {
+  color: #aaa49a;
+}
