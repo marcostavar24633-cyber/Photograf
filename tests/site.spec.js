@@ -99,3 +99,19 @@ test('primary interactions run without uncaught browser errors or horizontal pag
   expect(errors).toEqual([]);
   expect(hasHorizontalOverflow).toBe(false);
 });
+
+
+test('WCAG accessibility audit: main page and open navigation', async ({ page }) => {
+  const AxeBuilder = require('@axe-core/playwright').default;
+  await page.goto('/');
+  const pageResults = await new AxeBuilder({ page })
+    .withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa'])
+    .analyze();
+  expect(pageResults.violations.map(v => ({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))).toEqual([]);
+
+  await page.locator('#burger').click();
+  const menuResults = await new AxeBuilder({ page })
+    .withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa'])
+    .analyze();
+  expect(menuResults.violations.map(v => ({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))).toEqual([]);
+});
