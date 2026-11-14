@@ -823,8 +823,8 @@ body::after{
   margin-top:auto;
   padding:17px 20px;
   border-radius:999px;
-  background:var(--lx-gold);
-  color:#11100f !important;
+  background:#ead4ad;
+  color:#171512 !important;
   font:600 9px/1 var(--sans);
   letter-spacing:.12em;
 }
