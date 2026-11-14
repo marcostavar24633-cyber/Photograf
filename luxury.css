@@ -533,3 +533,62 @@ a{transition:color .3s var(--lx-ease)}
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
   .strip-track{animation:none}
 }
+
+/* Final component-specific pass: align booking form with its actual markup. */
+.book-grid{grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(42px,7vw,112px)}
+.slots{
+  border-color:rgba(197,167,119,.5);
+  color:var(--lx-gold-bright);
+  background:rgba(197,167,119,.06);
+  border-radius:2px;
+  font-size:11px;
+  letter-spacing:.04em;
+}
+.book-alt{border-left:1px solid var(--lx-gold);padding-left:20px}
+.book-alt p{color:rgba(241,236,227,.62);font-size:12px;line-height:1.8}
+.book-alt strong{color:var(--lx-gold-bright);font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.book-phone{color:var(--lx-ivory);font-size:28px}
+.book .form{
+  background:var(--lx-ivory);
+  color:var(--lx-ink);
+  border:1px solid rgba(197,167,119,.5);
+  border-radius:3px;
+  padding:clamp(28px,4vw,54px);
+  box-shadow:0 30px 90px rgba(0,0,0,.28);
+}
+.book .form h3{color:var(--lx-ink);font-size:38px;letter-spacing:-.035em}
+.book .form-body > p{color:#766b5e;font-size:12px;line-height:1.8}
+.book .field label,.book .f-legend{
+  color:#756957;
+  font-size:9px;
+  letter-spacing:.19em;
+}
+.book .field input,.book .field select,.book .field textarea{
+  color:var(--lx-ink);
+  background:transparent;
+  border:0;
+  border-bottom:1px solid rgba(43,35,26,.26);
+  border-radius:0;
+}
+.book .field input:focus,.book .field select:focus,.book .field textarea:focus{border-color:#98784d}
+.book .field input::placeholder,.book .field textarea::placeholder{color:#a79b8d}
+.book .radios span{
+  border-color:rgba(43,35,26,.2);
+  color:#51483d;
+  font-size:11px;
+  border-radius:2px;
+}
+.book .radios input:checked + span{
+  background:var(--lx-ink);
+  color:var(--lx-ivory);
+  border-color:var(--lx-ink);
+}
+.book .check{color:#6e6458;font-size:10px;line-height:1.7}
+.book .check a{color:#80613c;text-underline-offset:3px}
+.book .check input{accent-color:#98784d}
+.book .form-note{color:#887b6c;font-size:10px;line-height:1.7}
+.book .form-ok{color:var(--lx-ink)}
+.book .form-ok p{color:#756b60}
+.process-cta{margin-top:72px}
+.process-cta>span{color:rgba(241,236,227,.5);font-size:11px;letter-spacing:.04em}
+@media(max-width:900px){.book-grid{grid-template-columns:1fr}}
