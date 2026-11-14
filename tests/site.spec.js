@@ -75,7 +75,7 @@ test('indexing, local-only form and analytics safeguards are correct', async ({ 
   await page.goto('/');
   const safeguards = await page.evaluate(() => ({
     robots: document.querySelector('meta[name="robots"]')?.content,
-    formspreeDisabled: /FORMSPREE_ID:\s*''/.test(document.querySelectorAll('script')[1]?.textContent || ''),
+    localOnlyForm: /navigator\.clipboard\.writeText/.test(document.querySelectorAll('script')[1]?.textContent || '') && !/fetch\(/.test(document.querySelectorAll('script')[1]?.textContent || ''),
     analyticsDisabled: /METRIKA_ID:\s*0/.test(document.querySelectorAll('script')[1]?.textContent || '')
   }));
   expect(safeguards.robots).toBe('index,follow,max-image-preview:large');
