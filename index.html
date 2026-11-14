@@ -1021,7 +1021,7 @@ addEventListener('scroll', onScroll, {passive:true}); onScroll();
 const burger = $('#burger');
 const menu = $('#mnav');
 const menuClose = $('#menuClose');
-const menuLinks = $('#mnav a');
+const menuLinks = $$('#mnav a');
 function setMenu(open){
   document.body.classList.toggle('menu-open', open);
   burger.setAttribute('aria-expanded', String(open));
