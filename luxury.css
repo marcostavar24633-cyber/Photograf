@@ -137,11 +137,11 @@ a{transition:color .3s var(--lx-ease)}
 .hero .eyebrow{color:var(--lx-gold-bright)}
 .hero .eyebrow::before{background:var(--lx-gold-bright)}
 .hero h1{
-  max-width:10ch;
-  margin-top:30px;
-  font-size:clamp(64px,10vw,154px);
-  line-height:.82;
-  letter-spacing:-.065em;
+  max-width:13ch;
+  margin-top:22px;
+  font-size:clamp(58px,7.6vw,118px);
+  line-height:.88;
+  letter-spacing:-.055em;
 }
 .hero h1 em{color:var(--lx-gold-bright)}
 .hero p{
@@ -478,7 +478,7 @@ a{transition:color .3s var(--lx-ease)}
   .hdr.is-scrolled{height:64px}
   .hero{min-height:680px}
   .hero-in .wrap{padding-inline:clamp(22px,6vw,54px)}
-  .hero h1{font-size:clamp(60px,12vw,112px)}
+  .hero h1{font-size:clamp(58px,8.5vw,104px);max-width:12ch}
   .plans{gap:18px}
   .plan--hot{padding:48px 34px}
 }
