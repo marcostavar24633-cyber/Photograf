@@ -82,3 +82,20 @@ test('demo safeguards stay enabled', async ({ page }) => {
   expect(safeguards.formspreeDisabled).toBe(true);
   expect(safeguards.analyticsDisabled).toBe(true);
 });
+
+
+test('primary interactions run without uncaught browser errors or horizontal page overflow', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.goto('/');
+  await page.locator('#burger').click();
+  await page.locator('#menuClose').click();
+  await page.locator('#filters [data-filter="wedding"]').click();
+  await page.locator('#gallery .g-btn').first().click();
+  await page.locator('#lbClose').click();
+
+  const hasHorizontalOverflow = await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+  expect(errors).toEqual([]);
+  expect(hasHorizontalOverflow).toBe(false);
+});
