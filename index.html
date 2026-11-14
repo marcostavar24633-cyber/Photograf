@@ -1158,17 +1158,20 @@ $$('#filters button').forEach(b => {
 /* ===================== ЛАЙТБОКС ===================== */
 (() => {
   const lb = $('#lb'), img = $('#lbImg'), cap = $('#lbCap'), count = $('#lbCount');
-  let list = [], idx = 0, lastFocus;
+  let list = [], idx = 0, lastFocus, imageRequest = 0;
   const visible = () => items.filter(it => !it.classList.contains('is-hidden')).map(it => $('.g-btn', it));
   function show(k){
     idx = (k + list.length) % list.length;
+    const request = ++imageRequest;
     const b = list[idx], alt = $('img', b).alt;
     img.classList.remove('is-loaded','is-error');
     img.onload = () => {
+      if (request !== imageRequest) return;
       img.classList.remove('is-error');
       img.classList.add('is-loaded');
     };
     img.onerror = () => {
+      if (request !== imageRequest) return;
       img.classList.remove('is-loaded');
       img.classList.add('is-error');
       cap.textContent = 'Не удалось загрузить фотографию. Перейдите к следующему кадру или закройте просмотр.';
