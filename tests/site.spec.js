@@ -508,3 +508,39 @@ test('all referenced local image variants and core stylesheets resolve', async (
   }
   expect(failures).toEqual([]);
 });
+
+test('commercial calls to action lead to the booking form and preselect the chosen package', async ({ page }) => {
+  await page.goto('/');
+  const ctas = page.locator('a[data-goal], a[data-plan]');
+  const count = await ctas.count();
+  expect(count).toBeGreaterThan(5);
+  for (let i = 0; i < count; i++) {
+    const link = ctas.nth(i);
+    const href = await link.getAttribute('href');
+    expect(href, `CTA without a destination at index ${i}`).toBe('#book');
+  }
+  const plans = page.locator('.plans a[data-plan]');
+  const planCount = await plans.count();
+  expect(planCount).toBeGreaterThanOrEqual(3);
+  for (let i = 0; i < planCount; i++) {
+    const plan = plans.nth(i);
+    const name = await plan.getAttribute('data-plan');
+    await plan.click();
+    await expect(page.locator('#f-plan')).toHaveValue(name);
+  }
+  await expect(page.locator('#book')).toBeInViewport();
+});
+
+test('every in-page navigation target exists and the privacy page is linked from the site', async ({ page }) => {
+  await page.goto('/');
+  const links = await page.locator('a[href^="#"]').evaluateAll(nodes => nodes
+    .map(node => node.getAttribute('href'))
+    .filter(href => href && href.length > 1));
+  const missing = [...new Set(links)].filter(href => !document.getElementById(href.slice(1)));
+  expect(missing).toEqual([]);
+  const privacyLinks = page.locator('a[href="privacy.html"]');
+  await expect(privacyLinks).toHaveCount(2);
+  for (let i = 0; i < await privacyLinks.count(); i++) {
+    await expect(privacyLinks.nth(i)).toHaveAttribute('href', 'privacy.html');
+  }
+});
