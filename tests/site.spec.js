@@ -263,3 +263,26 @@ test('premium menu controls retain keyboard focus and reduced-motion preferences
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
   expect(overflow).toBe(false);
 });
+
+
+test('hero image is prioritized and portfolio imagery is deferred', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('link[rel="preload"][as="image"][fetchpriority="high"]')).toHaveCount(1);
+  const heroImage = page.locator('.hero-slide.is-active img').first();
+  await expect(heroImage).toHaveAttribute('fetchpriority', 'high');
+  await expect(heroImage).toHaveAttribute('decoding', 'async');
+  const galleryImages = page.locator('#portfolio .g-item img');
+  expect(await galleryImages.count()).toBeGreaterThan(0);
+  await expect(galleryImages.first()).toHaveAttribute('loading', 'lazy');
+  await expect(galleryImages.first()).toHaveAttribute('decoding', 'async');
+});
+
+test('performance enhancements do not introduce horizontal overflow on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  await page.goto('/');
+  const dimensions = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    document: document.documentElement.scrollWidth
+  }));
+  expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport);
+});
