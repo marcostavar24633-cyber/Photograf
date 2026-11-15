@@ -78,4 +78,25 @@
       card.addEventListener('pointerleave', () => image.style.removeProperty('--motion-tilt'), { passive: true });
     });
   }
+
+  // Subtle pointer depth on the photographic hero; never intercepts input.
+  if (hero && finePointer.matches) {
+    let depthFrame = 0;
+    hero.addEventListener('pointermove', event => {
+      if (depthFrame) return;
+      depthFrame = window.requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width - .5;
+        const py = (event.clientY - rect.top) / rect.height - .5;
+        hero.style.setProperty('--hero-shift-x', (px * -10).toFixed(1) + 'px');
+        hero.style.setProperty('--hero-shift-y', (py * -7).toFixed(1) + 'px');
+        depthFrame = 0;
+      });
+    }, { passive: true });
+    hero.addEventListener('pointerleave', () => {
+      hero.style.setProperty('--hero-shift-x', '0px');
+      hero.style.setProperty('--hero-shift-y', '0px');
+    }, { passive: true });
+  }
+
 })();
