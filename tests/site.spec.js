@@ -459,3 +459,52 @@ test('lightbox remains usable on a small touch viewport and loads the selected f
   await page.locator('#lbClose').click();
   await expect(dialog).toHaveAttribute('aria-hidden', 'true');
 });
+
+test('privacy notice is reachable, readable and accessible on desktop and mobile', async ({ page }) => {
+  const AxeBuilder = require('@axe-core/playwright').default;
+  await page.goto('/privacy.html');
+  await expect(page).toHaveTitle(/Конфиденциальность/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Уведомление о конфиденциальности');
+  await expect(page.getByRole('link', { name: /Вернуться на главную/ })).toHaveAttribute('href', 'index.html');
+  await expect(page.locator('body')).toContainText('Сайт не отправляет');
+  await expect(page.locator('body')).toContainText('GitHub Pages');
+  const desktopAudit = await new AxeBuilder({ page })
+    .withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa','wcag22aa'])
+    .analyze();
+  expect(desktopAudit.violations.map(v => ({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>n.target)}))).toEqual([]);
+
+  for (const width of [320, 360, 390, 768]) {
+    await page.setViewportSize({ width, height: 820 });
+    const layout = await page.evaluate(() => ({
+      viewport: document.documentElement.clientWidth,
+      document: document.documentElement.scrollWidth
+    }));
+    expect(layout.document, `privacy page overflows at ${width}px`).toBeLessThanOrEqual(layout.viewport);
+  }
+});
+
+test('all referenced local image variants and core stylesheets resolve', async ({ page, request }) => {
+  await page.goto('/');
+  const assets = await page.evaluate(() => {
+    const urls = new Set();
+    document.querySelectorAll('img[src],source[srcset]').forEach(el => {
+      if (el.hasAttribute('src')) urls.add(el.getAttribute('src'));
+      if (el.hasAttribute('srcset')) {
+        el.getAttribute('srcset').split(',').forEach(candidate => {
+          const url = candidate.trim().split(/\\s+/)[0];
+          if (url) urls.add(url);
+        });
+      }
+    });
+    document.querySelectorAll('link[rel="stylesheet"][href],script[src]').forEach(el => {
+      urls.add(el.getAttribute('href') || el.getAttribute('src'));
+    });
+    return [...urls].filter(url => url && !/^(https?:)?\\/\\//i.test(url) && !url.startsWith('data:'));
+  });
+  const failures = [];
+  for (const asset of assets) {
+    const response = await request.get(new URL(asset, 'http://127.0.0.1:4173/').href);
+    if (!response.ok()) failures.push({ asset, status: response.status() });
+  }
+  expect(failures).toEqual([]);
+});
