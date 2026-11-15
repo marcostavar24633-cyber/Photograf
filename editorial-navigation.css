@@ -86,7 +86,7 @@
   transition:border-color .5s,transform .7s;
 }
 #gallery .g-btn:hover::after,#gallery .g-btn:focus-visible::after{
-  border-color:rgba(240,217,182,.65);transform:inset(8px);
+  border-color:rgba(240,217,182,.65);transform:scale(.97);
 }
 #gallery .g-tag{left:18px;bottom:18px;padding:10px 13px}
 #gallery .g-btn img{transition:transform 1.25s cubic-bezier(.2,.7,.2,1),filter .8s}
@@ -111,3 +111,6 @@
 @media(prefers-reduced-motion:reduce){
   .hero-link,.editorial-rail a,#gallery .g-item::after,#gallery .g-btn::after,#gallery .g-btn img{transition:none!important}
 }
+
+/* Keep the hero kicker clear of the fixed header on desktop. */
+@media(min-width:761px){.hero-in{padding-bottom:28px!important}}
