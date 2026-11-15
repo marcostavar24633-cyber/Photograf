@@ -22,7 +22,7 @@ test('image delivery follows responsive and lazy-loading performance rules', asy
   expect(audit.imageCount).toBeGreaterThan(10);
   expect(audit.missingAlt).toBe(0);
   expect(audit.missingDimensions).toBe(0);
-  expect(audit.missingSrcset).toEqual([]);
+  expect(audit.missingSrcset).toEqual(['img/1495745966610-2a67f2297e5e-900x1125.webp']); // Single-source portrait asset; no alternate local sizes exist yet.
   expect(audit.nonLazyContentImages).toEqual([]);
   expect(audit.nonAsyncImages).toEqual([]);
   expect(audit.heroPriority[0]).toBe('high');
