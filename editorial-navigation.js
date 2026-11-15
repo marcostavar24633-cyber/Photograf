@@ -22,11 +22,6 @@
     link.href = '#' + id;
     link.dataset.label = label;
     link.setAttribute('aria-label', label);
-    link.addEventListener('click', () => {
-      available.forEach(item => {
-        if (item.id === id) item.node.dataset.railTarget = 'true';
-      });
-    });
     rail.append(link);
   });
   document.body.append(rail);
