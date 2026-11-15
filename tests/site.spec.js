@@ -491,7 +491,7 @@ test('all referenced local image variants and core stylesheets resolve', async (
       if (el.hasAttribute('src')) urls.add(el.getAttribute('src'));
       if (el.hasAttribute('srcset')) {
         el.getAttribute('srcset').split(',').forEach(candidate => {
-          const url = candidate.trim().split(/\s+/)[0];
+          const url = candidate.trim().split(' ')[0];
           if (url) urls.add(url);
         });
       }
