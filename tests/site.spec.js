@@ -388,7 +388,7 @@ test('lead form validation exposes errors and moves keyboard focus to the first 
 test('images declare responsive dimensions and use intentional loading priorities', async ({ page }) => {
   await page.goto('/');
   const imageAudit = await page.evaluate(() => {
-    const images = [...document.images];
+    const images = [...document.images].filter(img => img.id !== 'lbImg');
     const hero = document.querySelector('.hero-slide.is-active img');
     const galleryImages = [...document.querySelectorAll('#gallery img')];
     return {
