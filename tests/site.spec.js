@@ -233,3 +233,33 @@ test('lightbox cinema respects reduced motion', async ({ page }) => {
   const transition = await page.locator('#lbImg').evaluate(el => getComputedStyle(el).transitionDuration);
   expect(transition).toMatch(/0s|0\.01ms/);
 });
+
+
+test('premium navigation marks the current section and keeps anchor navigation responsive', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  const portfolioLink = page.locator('.hdr-nav a[href="#portfolio"]');
+  await page.locator('#portfolio').scrollIntoViewIfNeeded();
+  await expect(portfolioLink).toHaveAttribute('aria-current', 'location');
+  await page.locator('.hdr-nav a[href="#services"]').click();
+  await expect(page.locator('#services')).toBeInViewport();
+  await expect(page.locator('.hdr-nav a[href="#services"]')).toHaveAttribute('aria-current', 'location');
+});
+
+test('premium menu controls retain keyboard focus and reduced-motion preferences', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  const burger = page.locator('#burger');
+  await burger.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#mnav')).toHaveAttribute('aria-hidden', 'false');
+  await expect(page.locator('#mnav a').first()).toBeFocused();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#mnav')).toHaveAttribute('aria-hidden', 'true');
+  await expect(burger).toBeFocused();
+  const scrollBehavior = await page.locator('html').evaluate(el => getComputedStyle(el).scrollBehavior);
+  expect(scrollBehavior).toBe('auto');
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+  expect(overflow).toBe(false);
+});
