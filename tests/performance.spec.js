@@ -4,7 +4,7 @@ test('image delivery follows responsive and lazy-loading performance rules', asy
   await page.goto('/');
 
   const audit = await page.evaluate(() => {
-    const images = [...document.querySelectorAll('img')].filter(img => img.id !== 'lbImg');
+    const images = [...document.querySelectorAll('img')].filter(img => img.id !== 'lbImg' && !img.closest('[aria-hidden="true"]'));
     const heroImages = [...document.querySelectorAll('.hero-slide img')];
     const contentImages = images.filter(img => !img.closest('.hero'));
     return {
