@@ -383,3 +383,27 @@ test('lead form validation exposes errors and moves keyboard focus to the first 
   await expect(page.locator('#f-name')).toBeFocused();
   await expect(page.locator('#err-name')).toBeVisible();
 });
+
+
+test('images declare responsive dimensions and use intentional loading priorities', async ({ page }) => {
+  await page.goto('/');
+  const imageAudit = await page.evaluate(() => {
+    const images = [...document.images];
+    const hero = document.querySelector('.hero-slide.is-active img');
+    const galleryImages = [...document.querySelectorAll('#gallery img')];
+    return {
+      imagesMissingDimensions: images.filter(img => !img.hasAttribute('width') || !img.hasAttribute('height')).map(img => img.getAttribute('src')),
+      galleryNotLazy: galleryImages.filter(img => img.loading !== 'lazy').map(img => img.getAttribute('src')),
+      galleryMissingSrcset: galleryImages.filter(img => !img.srcset).map(img => img.getAttribute('src')),
+      heroPriority: hero?.getAttribute('fetchpriority'),
+      heroLoading: hero?.getAttribute('loading'),
+      heroDecoding: hero?.getAttribute('decoding')
+    };
+  });
+  expect(imageAudit.imagesMissingDimensions).toEqual([]);
+  expect(imageAudit.galleryNotLazy).toEqual([]);
+  expect(imageAudit.galleryMissingSrcset).toEqual([]);
+  expect(imageAudit.heroPriority).toBe('high');
+  expect(imageAudit.heroLoading).not.toBe('lazy');
+  expect(imageAudit.heroDecoding).toBe('async');
+});
