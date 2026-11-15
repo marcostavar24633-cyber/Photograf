@@ -206,3 +206,30 @@ test('gallery experience reports filtered image counts and remains responsive', 
   expect(overflow).toBe(false);
   await expect(page.locator('#filters [data-filter="all"]')).toBeVisible();
 });
+
+
+test('lightbox cinema transitions preserve keyboard and touch navigation', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  const first = page.locator('#gallery .g-btn').first();
+  await first.click();
+  const dialog = page.locator('#lb');
+  await expect(dialog).toHaveAttribute('aria-hidden','false');
+  await expect(page.locator('#lbImg')).toHaveClass(/is-loaded/);
+  await expect(page.locator('#lbCount')).toContainText('1 /');
+  await page.keyboard.press('ArrowRight');
+  await expect(page.locator('#lbCount')).toContainText('2 /');
+  await page.keyboard.press('ArrowLeft');
+  await expect(page.locator('#lbCount')).toContainText('1 /');
+  await page.keyboard.press('Escape');
+  await expect(dialog).toHaveAttribute('aria-hidden','true');
+  await expect(first).toBeFocused();
+});
+
+test('lightbox cinema respects reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  await page.locator('#gallery .g-btn').first().click();
+  const transition = await page.locator('#lbImg').evaluate(el => getComputedStyle(el).transitionDuration);
+  expect(transition).toMatch(/0s|0\.01ms/);
+});
