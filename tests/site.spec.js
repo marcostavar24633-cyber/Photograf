@@ -533,10 +533,11 @@ test('commercial calls to action lead to the booking form and preselect the chos
 
 test('every in-page navigation target exists and the privacy page is linked from the site', async ({ page }) => {
   await page.goto('/');
-  const links = await page.locator('a[href^="#"]').evaluateAll(nodes => nodes
-    .map(node => node.getAttribute('href'))
-    .filter(href => href && href.length > 1));
-  const missing = [...new Set(links)].filter(href => !document.getElementById(href.slice(1)));
+  const missing = await page.locator('a[href^="#"]').evaluateAll(nodes => {
+    const targets = new Set([...document.querySelectorAll('[id]')].map(node => '#' + node.id));
+    return [...new Set(nodes.map(node => node.getAttribute('href'))
+      .filter(href => href && href.length > 1 && !targets.has(href)))];
+  });
   expect(missing).toEqual([]);
   const privacyLinks = page.locator('a[href="privacy.html"]');
   await expect(privacyLinks).toHaveCount(2);
