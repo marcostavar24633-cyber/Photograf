@@ -141,3 +141,24 @@ test('WCAG accessibility audit: main page and open navigation', async ({ page })
     .analyze();
   expect(menuResults.violations.map(v => ({id:v.id,impact:v.impact,nodes:v.nodes.map(n=>({target:n.target,summary:n.failureSummary}))}))).toEqual([]);
 });
+
+
+test('three navigation modes cycle without breaking the menu', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  await expect(page.locator('.hdr-nav')).toBeVisible();
+  await expect(page.locator('.hdr-nav a')).toHaveCount(4);
+  await page.locator('#burger').click();
+  const mode = page.locator('#menuModeToggle');
+  await expect(mode).toHaveAttribute('data-mode', 'editorial');
+  await mode.click();
+  await expect(mode).toHaveAttribute('data-mode', 'vertical');
+  await expect(page.locator('body')).toHaveClass(/menu-mode-vertical/);
+  await mode.click();
+  await expect(mode).toHaveAttribute('data-mode', 'orbit');
+  await expect(page.locator('body')).toHaveClass(/menu-mode-orbit/);
+  await mode.click();
+  await expect(mode).toHaveAttribute('data-mode', 'editorial');
+  await page.locator('#menuClose').click();
+  await expect(page.locator('#mnav')).toHaveAttribute('aria-hidden', 'true');
+});
