@@ -189,3 +189,20 @@ test('signature hero disables motion when reduced motion is requested', async ({
   const animation = await activeImage.evaluate(el => getComputedStyle(el).animationName);
   expect(animation).toBe('none');
 });
+
+
+test('gallery experience reports filtered image counts and remains responsive', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto('/');
+  const cards = page.locator('#gallery .g-item');
+  const total = await cards.count();
+  await expect(page.locator('#portfolio .gallery-status')).toContainText(String(total).padStart(2,'0'));
+  await page.locator('#filters [data-filter="wedding"]').click();
+  const weddingCount = await page.locator('#gallery .g-item[data-cat="wedding"]:not(.is-hidden)').count();
+  await expect(page.locator('#portfolio .gallery-status')).toContainText(String(weddingCount).padStart(2,'0'));
+  await expect(page.locator('#filters [data-filter="wedding"]')).toHaveAttribute('aria-pressed','true');
+  await page.setViewportSize({ width: 360, height: 800 });
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+  expect(overflow).toBe(false);
+  await expect(page.locator('#filters [data-filter="all"]')).toBeVisible();
+});
