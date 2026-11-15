@@ -286,3 +286,36 @@ test('performance enhancements do not introduce horizontal overflow on mobile', 
   }));
   expect(dimensions.document).toBeLessThanOrEqual(dimensions.viewport);
 });
+
+test('technical SEO metadata stays consistent with demo noindex policy', async ({ page }) => {
+  await page.goto('/');
+  const metadata = await page.evaluate(() => {
+    const schema = [...document.querySelectorAll('script[type="application/ld+json"]')]
+      .map(node => JSON.parse(node.textContent));
+    return {
+      lang: document.documentElement.lang,
+      title: document.title,
+      description: document.querySelector('meta[name="description"]')?.content,
+      robots: document.querySelector('meta[name="robots"]')?.content,
+      canonical: document.querySelector('link[rel="canonical"]')?.href,
+      ogUrl: document.querySelector('meta[property="og:url"]')?.content,
+      ogImage: document.querySelector('meta[property="og:image"]')?.content,
+      schema
+    };
+  });
+  expect(metadata.lang).toBe('ru');
+  expect(metadata.title).toMatch(/Вера Ланская/);
+  expect(metadata.description.length).toBeGreaterThan(50);
+  expect(metadata.robots).toBe('noindex,follow');
+  expect(metadata.canonical).toBe('https://marcostavar24633-cyber.github.io/Photograf/');
+  expect(metadata.ogUrl).toBe(metadata.canonical);
+  expect(metadata.ogImage).toMatch(/^https:\/\//);
+  expect(metadata.schema.some(item => item['@type'] === 'WebSite' && item.url === metadata.canonical)).toBe(true);
+  expect(await page.locator('head').textContent()).not.toContain('\\n<link');
+  const robotsTxt = await page.request.get('/robots.txt');
+  expect(robotsTxt.ok()).toBe(true);
+  expect(await robotsTxt.text()).toContain('Sitemap: https://marcostavar24633-cyber.github.io/Photograf/sitemap.xml');
+  const sitemapXml = await page.request.get('/sitemap.xml');
+  expect(sitemapXml.ok()).toBe(true);
+  expect(await sitemapXml.text()).not.toContain('/privacy.html');
+});
