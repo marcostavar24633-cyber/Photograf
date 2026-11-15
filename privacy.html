@@ -7,12 +7,13 @@
   <meta name="description" content="Как работает форма заявки и какие данные обрабатывает сайт Веры Ланской.">
   <title>Конфиденциальность — Вера Ланская</title>
   <style>
-    :root{color-scheme:light;--bg:#f4efe7;--paper:#fbf8f3;--ink:#171512;--muted:#5e574d;--accent:#8c6a3f}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}
-    main{width:min(780px,calc(100% - 40px));margin:8vh auto;padding:clamp(24px,5vw,56px);background:var(--paper);border:1px solid rgba(23,21,18,.12)}
-    h1,h2{font-family:Georgia,serif;font-weight:400;line-height:1.15}h1{font-size:clamp(32px,6vw,54px);margin:12px 0 24px}h2{font-size:25px;margin:32px 0 10px}
+    :root{color-scheme:dark;--bg:#171019;--paper:#261b28;--ink:#f2e9e8;--muted:#c8b9c3;--accent:#e5c99f}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% 0%,#42283d 0,transparent 42%),var(--bg);color:var(--ink);font:16px/1.75 system-ui,-apple-system,"Segoe UI",sans-serif}
+    main{width:min(780px,calc(100% - 40px));margin:8vh auto;padding:clamp(24px,5vw,56px);background:linear-gradient(150deg,rgba(48,31,47,.98),rgba(23,16,25,.98));border:1px solid rgba(215,189,154,.28);border-radius:18px;box-shadow:0 28px 80px rgba(0,0,0,.25)}
+    h1,h2{font-family:Georgia,serif;font-weight:400;line-height:1.15}h1{font-size:clamp(32px,6vw,54px);margin:12px 0 24px;letter-spacing:-.025em}h2{font-size:25px;margin:32px 0 10px;color:var(--ink)}
     p,li{color:var(--muted)}a{color:var(--accent);text-underline-offset:4px}.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
-    .notice{padding:16px 18px;border-left:3px solid var(--accent);background:var(--bg);color:var(--ink)}
+    .notice{padding:16px 18px;border:1px solid rgba(215,189,154,.22);border-left:3px solid var(--accent);border-radius:8px;background:rgba(215,189,154,.07);color:var(--ink)}
+    @media(max-width:520px){main{width:calc(100% - 24px);margin:24px auto;padding:24px 20px;border-radius:14px}}
   </style>
 </head>
 <body>
@@ -28,11 +29,9 @@
   <h2>Аналитика и файлы cookie</h2>
   <p>Счётчик Яндекс.Метрики и другие аналитические счётчики в демонстрационной версии не подключены. Код сайта не использует cookie, localStorage или sessionStorage для сохранения данных посетителей.</p>
 
-  <h2>Внешние ресурсы и хостинг</h2>
-  <p>Страница может загружать веб-шрифты Google Fonts и открывать внешние ссылки на сторонние сервисы. При обращении к внешним ресурсам соответствующие поставщики и хостинг-провайдер могут получать технические сведения о сетевом запросе в соответствии со своими правилами и политиками.</p>
-
   <h2>Внешние ресурсы и технические данные</h2>
-  <p>Сайт размещён на GitHub Pages. При открытии страницы GitHub и другие инфраструктурные поставщики могут обрабатывать технические данные запроса в соответствии со своими правилами. Веб-шрифты загружаются с Google Fonts. Для прекращения таких внешних запросов потребуется локально разместить файлы шрифтов.</p>
+  <p>Сайт размещён на GitHub Pages. При открытии страницы GitHub и инфраструктурные поставщики могут обрабатывать технические сведения сетевого запроса в соответствии со своими правилами и политиками. Веб-шрифты загружаются с Google Fonts; при обращении к этому ресурсу поставщик может получать технические данные запроса. Чтобы исключить запросы к Google Fonts, потребуется разместить файлы шрифтов непосредственно на сайте.</p>
+
   <h2>Изменения</h2>
   <p>Если в будущем на сайте появится реальная отправка заявок, аналитика или интеграция с CRM, это уведомление необходимо обновить до включения таких функций и описать фактические цели, состав данных, получателей и сроки хранения.</p>
 
