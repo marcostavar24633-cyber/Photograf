@@ -162,3 +162,30 @@ test('three navigation modes cycle without breaking the menu', async ({ page }) 
   await page.locator('#menuClose').click();
   await expect(page.locator('#mnav')).toHaveAttribute('aria-hidden', 'true');
 });
+
+
+test('signature hero keeps cinematic motion accessible and responsive', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const activeImage = page.locator('.hero-slide.is-active img');
+  await expect(activeImage).toBeVisible();
+  const animation = await activeImage.evaluate(el => getComputedStyle(el).animationName);
+  expect(animation).toContain('heroCinematicDrift');
+  await page.locator('.hero').hover({ position: { x: 180, y: 160 } });
+  await expect.poll(() => page.locator('.hero').evaluate(el => el.style.getPropertyValue('--hero-shift-x'))).not.toBe('');
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator('.hero')).toBeVisible();
+  const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+  expect(overflow).toBe(false);
+  expect(errors).toEqual([]);
+});
+
+test('signature hero disables motion when reduced motion is requested', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const activeImage = page.locator('.hero-slide.is-active img');
+  const animation = await activeImage.evaluate(el => getComputedStyle(el).animationName);
+  expect(animation).toBe('none');
+});
