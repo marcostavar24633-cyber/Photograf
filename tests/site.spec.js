@@ -407,3 +407,55 @@ test('images declare responsive dimensions and use intentional loading prioritie
   expect(imageAudit.heroLoading).not.toBe('lazy');
   expect(imageAudit.heroDecoding).toBe('async');
 });
+
+
+test('lightbox keyboard controls keep focus contained and restore it on close', async ({ page }) => {
+  await page.goto('/');
+  const opener = page.locator('#gallery .g-btn').first();
+  await opener.click();
+  const dialog = page.locator('#lb');
+  await expect(dialog).toHaveAttribute('aria-hidden', 'false');
+  await expect(page.locator('#lbClose')).toBeFocused();
+
+  await page.keyboard.press('Shift+Tab');
+  await expect(page.locator('#lbNext')).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(page.locator('#lbClose')).toBeFocused();
+
+  const initialIndex = await dialog.getAttribute('data-view-index');
+  await page.keyboard.press('ArrowRight');
+  await expect(dialog).not.toHaveAttribute('data-view-index', initialIndex);
+  await page.keyboard.press('ArrowLeft');
+  await expect(dialog).toHaveAttribute('data-view-index', initialIndex);
+
+  await page.keyboard.press('Escape');
+  await expect(dialog).toHaveAttribute('aria-hidden', 'true');
+  await expect(opener).toBeFocused();
+});
+
+test('lightbox remains usable on a small touch viewport and loads the selected full image eagerly', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  await page.goto('/');
+  const opener = page.locator('#gallery .g-btn').first();
+  await opener.scrollIntoViewIfNeeded();
+  await opener.click();
+  const dialog = page.locator('#lb');
+  await expect(dialog).toHaveAttribute('aria-hidden', 'false');
+  await expect(page.locator('#lbImg')).toHaveAttribute('loading', 'eager');
+  await expect(page.locator('#lbClose')).toBeVisible();
+  await expect(page.locator('#lbPrev')).toBeVisible();
+  await expect(page.locator('#lbNext')).toBeVisible();
+
+  const controls = await page.evaluate(() => ['#lbClose','#lbPrev','#lbNext'].map(selector => {
+    const rect = document.querySelector(selector).getBoundingClientRect();
+    return {left:rect.left,right:rect.right,top:rect.top,bottom:rect.bottom};
+  }));
+  for (const rect of controls) {
+    expect(rect.left).toBeGreaterThanOrEqual(0);
+    expect(rect.right).toBeLessThanOrEqual(320);
+    expect(rect.top).toBeGreaterThanOrEqual(0);
+    expect(rect.bottom).toBeLessThanOrEqual(720);
+  }
+  await page.locator('#lbClose').click();
+  await expect(dialog).toHaveAttribute('aria-hidden', 'true');
+});

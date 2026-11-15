@@ -1126,6 +1126,7 @@ $$('#filters button').forEach(b => {
     lb.setAttribute('data-view-index', String(idx + 1));
     const request = ++imageRequest;
     const b = list[idx], alt = $('img', b).alt;
+    img.loading = 'eager'; // Opening the lightbox is an explicit request to load this full-size image.
     img.classList.remove('is-loaded','is-error');
     img.classList.add('is-changing');
     img.onload = () => {
