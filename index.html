@@ -784,7 +784,7 @@ input,select,textarea{border-radius:16px}
       </article>
 
       <article class="plan plan--hot reveal">
-        <span class="badge">Выбор клиентов</span>
+        <span class="badge">Средний формат</span>
         <h3 class="plan-name">История</h3>
         <p class="plan-for">Семейная съёмка, love story с двумя локациями или камерная роспись</p>
         <div class="plan-price"><small>от</small>45 000 ₽</div>
@@ -918,7 +918,7 @@ input,select,textarea{border-radius:16px}
         <button type="submit" class="btn btn--block" id="submitBtn" data-goal="form_submit"><span class="lbl">Подготовить сообщение</span><span aria-hidden="true">↗</span></button>
         <p class="form-note" role="status" aria-live="polite" aria-atomic="true">После проверки текст заявки будет скопирован в буфер обмена. Отправка произойдёт только по вашему действию.</p>
       </div>
-      <div class="form-ok" role="status" aria-live="polite" tabindex="-1"><div class="ok-ico">✓</div><h3>Сообщение готово</h3><p id="formResultMessage">Текст заявки будет подготовлен для отправки вами самостоятельно.</p><button type="button" class="btn btn--ghost" id="copyAgain">Скопировать ещё раз</button><pre id="messagePreview" class="message-preview" tabindex="0"></pre></div>
+      <div class="form-ok" role="status" aria-live="polite" tabindex="-1"><div class="ok-ico">✓</div><h3>Текст заявки подготовлен</h3><p id="formResultMessage">Заявка не отправлена. Скопируйте текст ниже и самостоятельно отправьте его выбранным способом.</p><button type="button" class="btn btn--ghost" id="copyAgain">Скопировать ещё раз</button><pre id="messagePreview" class="message-preview" tabindex="0"></pre></div>
     </form>
   </div>
 </section>
@@ -968,7 +968,6 @@ const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* Цели Яндекс.Метрики: любой элемент с data-goal */
 function goal(name){ try{ if (CONFIG.METRIKA_ID && window.ym) ym(CONFIG.METRIKA_ID, 'reachGoal', name); }catch(e){} }
 document.addEventListener('click', e => { const g = e.target.closest('[data-goal]'); if (g && g.type !== 'submit') goal(g.dataset.goal); });
-document.querySelector('#leadForm').addEventListener('submit', () => goal('form_submit'));
 
 /* ===================== ШАПКА + МЕНЮ ===================== */
 const hdr = $('#hdr'), mbar = $('#mbar');

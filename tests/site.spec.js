@@ -319,3 +319,16 @@ test('technical SEO metadata stays consistent with demo noindex policy', async (
   expect(sitemapXml.ok()).toBe(true);
   expect(await sitemapXml.text()).not.toContain('/privacy.html');
 });
+
+test('conversion copy never implies a customer endorsement or completed submission', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.plan--hot .badge')).toHaveText('Средний формат');
+  await expect(page.locator('#submitBtn')).toContainText('Подготовить сообщение');
+  await page.locator('#f-name').fill('Мария');
+  await page.locator('#f-phone').fill('@maria_photo');
+  await page.locator('#f-agree').check();
+  await page.locator('#submitBtn').click();
+  await expect(page.locator('.form-ok h3')).toHaveText('Текст заявки подготовлен');
+  await expect(page.locator('#formResultMessage')).toContainText('Заявка не отправлена');
+  await expect(page.locator('#messagePreview')).toContainText('Имя: Мария');
+});
