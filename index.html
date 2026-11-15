@@ -1122,12 +1122,14 @@ $$('#filters button').forEach(b => {
   const visible = () => items.filter(it => !it.classList.contains('is-hidden')).map(it => $('.g-btn', it));
   function show(k){
     idx = (k + list.length) % list.length;
+    lb.setAttribute('data-view-index', String(idx + 1));
     const request = ++imageRequest;
     const b = list[idx], alt = $('img', b).alt;
     img.classList.remove('is-loaded','is-error');
+    img.classList.add('is-changing');
     img.onload = () => {
       if (request !== imageRequest) return;
-      img.classList.remove('is-error');
+      img.classList.remove('is-error','is-changing');
       img.classList.add('is-loaded');
     };
     img.onerror = () => {
@@ -1140,12 +1142,14 @@ $$('#filters button').forEach(b => {
     img.alt = alt;
     img.src = b.dataset.full;
     count.textContent = (idx + 1) + ' / ' + list.length;
+    count.setAttribute('aria-label', 'Фотография ' + (idx + 1) + ' из ' + list.length);
     // предзагрузка соседей
     [idx + 1, idx - 1].forEach(n => { const p = list[(n + list.length) % list.length]; if (p) new Image().src = p.dataset.full; });
   }
   function open(b){
     list = visible(); lastFocus = b;
     lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false');
+    lb.setAttribute('data-view-index', '0');
     document.body.style.overflow = 'hidden';
     show(list.indexOf(b)); $('#lbClose').focus();
   }
