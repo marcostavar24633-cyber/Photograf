@@ -409,6 +409,7 @@ input,select,textarea{border-radius:16px}
 </style>
   <link rel="stylesheet" href="luxury.css">
 <link rel="stylesheet" href="motion.css">
+<link rel="stylesheet" href="nav-modes.css">
 </head>
 <body>
 
@@ -417,6 +418,12 @@ input,select,textarea{border-radius:16px}
 <header class="hdr" id="hdr">
   <div class="wrap">
     <a href="#top" class="logo">Photograf<small>visual stories</small></a>
+    <nav class="hdr-nav" aria-label="Быстрая навигация">
+      <a href="#portfolio">Портфолио</a>
+      <a href="#about">Философия</a>
+      <a href="#services">Форматы</a>
+      <a href="#book">Контакт</a>
+    </nav>
     <span class="hdr-note">ИСТОРИИ В СВЕТЕ И ЧУВСТВАХ</span>
     <a href="#book" class="btn hdr-cta" data-goal="cta_header"><span>Обсудить съёмку</span><span class="arr" aria-hidden="true">↗</span></a>
     <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mnav"><span></span><span></span><span></span><b>МЕНЮ</b></button>
@@ -426,7 +433,10 @@ input,select,textarea{border-radius:16px}
   <div class="mnav-shell">
     <div class="mnav-head">
       <a href="#top" class="mnav-brand">Photograf <span>VISUAL STORIES</span></a>
-      <button class="mnav-close" id="menuClose" type="button" aria-label="Закрыть меню">ЗАКРЫТЬ <span aria-hidden="true">×</span></button>
+      <div class="mnav-head-actions">
+        <button class="menu-mode-toggle" id="menuModeToggle" type="button" aria-label="Сменить режим меню" aria-live="polite">РЕЖИМ: EDITORIAL <span aria-hidden="true">↗</span></button>
+        <button class="mnav-close" id="menuClose" type="button" aria-label="Закрыть меню">ЗАКРЫТЬ <span aria-hidden="true">×</span></button>
+      </div>
     </div>
     <div class="mnav-grid">
       <div class="mnav-group">
@@ -1287,5 +1297,6 @@ $('#copyAgain')?.addEventListener('click', async () => {
 new IntersectionObserver(([en]) => { formVisible = en.isIntersecting; onScroll(); }, {threshold:.15}).observe($('#book'));
 </script>
 <script src="motion.js" defer></script>
+<script src="nav-modes.js" defer></script>
 </body>
 </html>
