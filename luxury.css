@@ -972,3 +972,50 @@ body::after{
  #portfolio .g-item,#portfolio .g-btn img,#portfolio .g-tag,#portfolio .filters button::before{transition:none!important}
  #portfolio .g-item:not(.is-in){opacity:1;transform:none}
 }
+
+/* LIGHTBOX CINEMA PRO — immersive, calm image transitions */
+.lb{isolation:isolate;overflow:hidden}
+.lb::before{
+ content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.55;
+ background:radial-gradient(ellipse at 50% 46%,rgba(197,167,119,.10),transparent 58%);
+}
+.lb-count,.lb-btn,.lb-fig{z-index:1}
+.lb-count{
+ padding:12px 16px;border:1px solid rgba(197,167,119,.22);
+ background:rgba(15,13,11,.42);backdrop-filter:blur(14px);
+ font-variant-numeric:tabular-nums;letter-spacing:.22em
+}
+.lb-fig{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,2.5vh,26px)}
+.lb-img{
+ max-width:min(82vw,1440px);max-height:78vh;
+ object-fit:contain;opacity:0;transform:scale(.975) translateY(10px);
+ filter:blur(8px) brightness(.88);
+ transition:opacity .48s ease,transform .72s cubic-bezier(.2,.72,.18,1),filter .72s ease;
+ will-change:opacity,transform,filter
+}
+.lb-img.is-loaded{
+ opacity:1;transform:scale(1) translateY(0);filter:blur(0) brightness(1)
+}
+.lb-img.is-changing{opacity:0;transform:scale(.985);filter:blur(5px)}
+.lb-img.is-error{opacity:1;transform:none;filter:none}
+.lb-cap{
+ min-height:1.5em;text-align:center;max-width:min(680px,82vw);
+ font:500 10px/1.7 var(--sans);letter-spacing:.14em;text-transform:uppercase;
+ transition:opacity .3s ease
+}
+.lb-btn{width:54px;height:54px;display:grid;place-items:center;backdrop-filter:blur(14px);transition:background .35s ease,border-color .35s ease,color .35s ease,transform .35s ease}
+.lb-prev:hover{transform:translateX(-3px)}
+.lb-next:hover{transform:translateX(3px)}
+.lb-close:hover{transform:rotate(90deg)}
+.lb-btn:focus-visible{outline:2px solid var(--lx-gold-bright);outline-offset:4px}
+@media(max-width:760px){
+ .lb-img{max-width:92vw;max-height:72vh}
+ .lb-btn{width:46px;height:46px}
+ .lb-prev{left:12px}.lb-next{right:12px}
+ .lb-count{top:18px;left:18px}
+ .lb-cap{max-width:88vw;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){
+ .lb-img,.lb-cap,.lb-btn{transition:none!important}
+ .lb-img,.lb-img.is-loaded,.lb-img.is-changing{transform:none!important;filter:none!important}
+}
