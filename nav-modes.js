@@ -13,7 +13,7 @@
   const apply = () => {
     modes.forEach(mode => body.classList.toggle('menu-mode-' + mode.id, modes[index].id === mode.id));
     toggle.innerHTML = 'РЕЖИМ: ' + modes[index].label + ' <span aria-hidden="true">↗</span>';
-    toggle.setAttribute('aria-label','Текущий режим меню: ' + modes[index].label + '. Нажмите, чтобы сменить');
+    toggle.title = 'Переключить режим навигации';
     toggle.dataset.mode = modes[index].id;
   };
   toggle.addEventListener('click', () => {
