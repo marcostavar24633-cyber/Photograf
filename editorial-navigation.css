@@ -313,3 +313,7 @@
   #gallery .g-btn::before,#gallery .g-tag{transition:none!important}
   .strip::before,.strip::after{display:none}
 }
+
+
+/* WCAG AA: prevent generic last-link styles from overriding the menu CTA contrast. */
+.mnav .mnav-aside a.mnav-cta{color:var(--rebirth-champagne-bright)}
