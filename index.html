@@ -915,7 +915,7 @@ input,select,textarea{border-radius:16px}
         <div class="field"><label for="f-plan">Формат</label><select id="f-plan" name="plan"><option>Пока не выбрал(а)</option><option>Мгновение</option><option>История</option><option>Целый день</option><option>Индивидуальный</option></select></div>
         <div class="field"><label for="f-msg">Пожелания</label><textarea id="f-msg" name="message" rows="3" placeholder="Город, настроение, количество участников и другие детали"></textarea></div>
         <label class="check" id="agreeWrap"><input type="checkbox" name="agree" id="f-agree" aria-describedby="err-agree"><span>Понимаю, что сообщение будет сформировано на моём устройстве и отправлено мной самостоятельно. <a href="privacy.html" target="_blank" rel="noopener">Политика конфиденциальности</a></span><span class="err" id="err-agree" role="alert">Подтвердите согласие перед подготовкой сообщения.</span></label>
-        <button type="submit" class="btn btn--block" id="submitBtn" data-goal="form_submit"><span class="lbl">Подготовить сообщение</span><span aria-hidden="true">↗</span></button>
+        <button type="submit" class="btn btn--block" id="submitBtn"><span class="lbl">Подготовить сообщение</span><span aria-hidden="true">↗</span></button>
         <p class="form-note" role="status" aria-live="polite" aria-atomic="true">После проверки текст заявки будет скопирован в буфер обмена. Отправка произойдёт только по вашему действию.</p>
       </div>
       <div class="form-ok" role="status" aria-live="polite" tabindex="-1"><div class="ok-ico">✓</div><h3>Текст заявки подготовлен</h3><p id="formResultMessage">Заявка не отправлена. Скопируйте текст ниже и самостоятельно отправьте его выбранным способом.</p><button type="button" class="btn btn--ghost" id="copyAgain">Скопировать ещё раз</button><pre id="messagePreview" class="message-preview" tabindex="0"></pre></div>
@@ -1278,14 +1278,14 @@ form.addEventListener('submit', async e => {
   btn.disabled = true; btn.classList.add('is-loading');
   try {
     await copyLeadMessage();
-    $('#formResultMessage').textContent = 'Текст заявки скопирован. Теперь вы можете вставить его в выбранный мессенджер или письмо.';
+    $('#formResultMessage').textContent = 'Заявка не отправлена. Текст скопирован в буфер обмена — вставьте его в выбранный мессенджер или письмо и отправьте самостоятельно.';
     $('#messagePreview').textContent = preparedMessage;
     form.classList.add('is-sent');
     $('.form-ok', form).focus();
     goal('form_prepared');
   } catch(err) {
     $('.form-note').textContent = 'Автоматическое копирование недоступно. Текст можно скопировать вручную из поля ниже.';
-    $('#formResultMessage').textContent = 'Текст подготовлен, но браузер не разрешил автоматическое копирование. Скопируйте его вручную из поля ниже.';
+    $('#formResultMessage').textContent = 'Заявка не отправлена. Браузер не разрешил автоматическое копирование — выделите текст ниже и отправьте его самостоятельно.';
     $('#messagePreview').textContent = preparedMessage;
     form.classList.add('is-sent');
     $('.form-ok', form).focus();

@@ -330,5 +330,7 @@ test('conversion copy never implies a customer endorsement or completed submissi
   await page.locator('#submitBtn').click();
   await expect(page.locator('.form-ok h3')).toHaveText('Текст заявки подготовлен');
   await expect(page.locator('#formResultMessage')).toContainText('Заявка не отправлена');
+  await expect(page.locator('#formResultMessage')).toContainText('отправьте самостоятельно');
+  await expect(page.locator('#submitBtn')).not.toHaveAttribute('data-goal','form_submit');
   await expect(page.locator('#messagePreview')).toContainText('Имя: Мария');
 });
