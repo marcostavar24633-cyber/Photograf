@@ -1153,7 +1153,11 @@ $$('#filters button').forEach(b => {
     lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false');
     lb.setAttribute('data-view-index', '0');
     document.body.style.overflow = 'hidden';
-    show(list.indexOf(b)); $('#lbClose').focus();
+    show(list.indexOf(b));
+    // Wait for the dialog's visibility transition before moving keyboard focus.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      if (lb.classList.contains('is-open')) $('#lbClose').focus();
+    }));
   }
   function close(){
     lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
