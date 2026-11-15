@@ -1154,10 +1154,17 @@ $$('#filters button').forEach(b => {
     lb.setAttribute('data-view-index', '0');
     document.body.style.overflow = 'hidden';
     show(list.indexOf(b));
-    // Wait for the dialog's visibility transition before moving keyboard focus.
-    requestAnimationFrame(() => requestAnimationFrame(() => {
+    // Focus only after the fade-in makes the dialog visible to the browser.
+    let focusApplied = false;
+    const focusDialog = () => {
+      if (focusApplied) return;
+      focusApplied = true;
       if (lb.classList.contains('is-open')) $('#lbClose').focus();
-    }));
+    };
+    lb.addEventListener('transitionend', event => {
+      if (event.target === lb && event.propertyName === 'opacity') focusDialog();
+    }, { once: true });
+    setTimeout(focusDialog, 500);
   }
   function close(){
     lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true');
