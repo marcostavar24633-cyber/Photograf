@@ -499,7 +499,7 @@ test('all referenced local image variants and core stylesheets resolve', async (
     document.querySelectorAll('link[rel="stylesheet"][href],script[src]').forEach(el => {
       urls.add(el.getAttribute('href') || el.getAttribute('src'));
     });
-    return [...urls].filter(url => url && !/^(https?:)?\\/\\//i.test(url) && !url.startsWith('data:'));
+    return [...urls].filter(url => url && !url.startsWith('//') && !url.startsWith('http:') && !url.startsWith('https:') && !url.startsWith('data:'));
   });
   const failures = [];
   for (const asset of assets) {
