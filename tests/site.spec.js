@@ -334,3 +334,52 @@ test('conversion copy never implies a customer endorsement or completed submissi
   await expect(page.locator('#submitBtn')).not.toHaveAttribute('data-goal','form_submit');
   await expect(page.locator('#messagePreview')).toContainText('Имя: Мария');
 });
+
+
+test('responsive layout stays within the viewport across common device widths', async ({ page }) => {
+  const widths = [320, 360, 375, 390, 414, 768, 900, 1024, 1280, 1440];
+  for (const width of widths) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const layout = await page.evaluate(() => {
+      const overflow = [...document.querySelectorAll('body *')]
+        .filter(el => {
+          const style = getComputedStyle(el);
+          if (style.position === 'fixed' || style.position === 'absolute' || style.display === 'none') return false;
+          const rect = el.getBoundingClientRect();
+          return rect.width > 0 && (rect.left < -1 || rect.right > document.documentElement.clientWidth + 1);
+        })
+        .slice(0, 12)
+        .map(el => ({tag:el.tagName, id:el.id, className:typeof el.className === 'string' ? el.className : '', left:Math.round(el.getBoundingClientRect().left), right:Math.round(el.getBoundingClientRect().right)}));
+      return {
+        viewport: document.documentElement.clientWidth,
+        document: document.documentElement.scrollWidth,
+        offenders: overflow
+      };
+    });
+    expect(layout.document, `horizontal overflow at ${width}px: ${JSON.stringify(layout.offenders)}`).toBeLessThanOrEqual(layout.viewport);
+    await expect(page.locator('#hdr')).toBeVisible();
+    await expect(page.locator('#book')).toBeAttached();
+  }
+});
+
+test('all local portfolio images load after lazy sections are brought into view', async ({ page }) => {
+  await page.goto('/');
+  const images = page.locator('#portfolio .g-item img');
+  const count = await images.count();
+  expect(count).toBeGreaterThan(10);
+  for (let i = 0; i < count; i++) {
+    const image = images.nth(i);
+    await image.scrollIntoViewIfNeeded();
+    await expect.poll(() => image.evaluate(img => img.complete && img.naturalWidth > 0), { timeout: 10000 }).toBe(true);
+  }
+});
+
+test('lead form validation exposes errors and moves keyboard focus to the first invalid field', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#submitBtn').click();
+  await expect(page.locator('#f-name')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#f-phone')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#f-name')).toBeFocused();
+  await expect(page.locator('#err-name')).toBeVisible();
+});
