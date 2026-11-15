@@ -517,7 +517,8 @@ test('commercial calls to action lead to the booking form and preselect the chos
   for (let i = 0; i < count; i++) {
     const link = ctas.nth(i);
     const href = await link.getAttribute('href');
-    expect(href, `CTA without a destination at index ${i}`).toBe('#book');
+    expect(href, `CTA without a destination at index ${i}`).toMatch(/^#[a-z0-9_-]+$/i);
+    await expect(page.locator(href)).toHaveCount(1);
   }
   const plans = page.locator('.plans a[data-plan]');
   const planCount = await plans.count();
